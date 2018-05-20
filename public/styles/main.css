@@ -1,0 +1,188 @@
+@font-face {
+  font-family: "Dusha";
+  src: url("../fonts/dusha.woff2");
+}
+
+body {
+  font-family: Dusha;
+  margin: 0;
+  padding: 0;
+  background-image: url('../images/bg.jpg');
+  background-size: cover;
+}
+
+#app {
+  display: flex;
+  flex-direction: row;
+}
+
+nav {
+  min-width: 300px;
+  flex-grow: 0;
+  order: 1;
+  padding: 0 20px;
+  font-size: 2.5vh;
+  height: 100%;
+  overflow-y: auto;
+}
+
+nav h1 {
+  font-size: 120%;
+  margin-bottom: 0.2em;
+  margin-top: 0;
+}
+
+nav h3 {
+  font-size: 90%;
+  margin-bottom: 0.2em;
+  margin-top: 0.5em;
+}
+
+nav .group {
+  border-radius: 1vh;
+  padding: 0.5vh 1vh;
+  cursor: pointer;
+}
+
+nav .group:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+nav .group.selected {
+  background-color: rgba(255, 255, 255, 0.7);
+  border: 2px solid black;
+}
+
+nav .group .team .rank {
+  float: right;
+}
+
+main {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  height: 100vh;
+  flex-grow: 1;
+  order: 0;
+  position: relative;
+}
+
+main::before {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  position: absolute;
+  background-color: white;
+  z-index: -2;
+  content: "";
+}
+
+div.country {
+  font-size: 10vh;
+  position: relative;
+  width: 50%;
+  overflow: hidden;
+}
+
+div.country h1 {
+  position: absolute;
+  top: 1vh;
+  left: 1vh;
+  font-size: 10vh;
+  padding: 1vh 1vw;
+  margin: 0;
+  background-color: rgba(255, 255, 255, 0.4);
+  border-radius: 1vh;
+}
+
+div.country div.rank {
+  position: absolute;
+  bottom: 1vh;
+  right: 1vh;
+  font-size: 10vh;
+  padding: 1vh 1vw;
+  margin: 0;
+  height: 10vh;
+  width: 10vh;
+  text-align: center;
+  vertical-align: top;
+  background-color: rgba(255, 255, 255, 0.4);
+  border-radius: 1vh;
+  background-image: url('../images/laurel.svg');
+  background-repeat: repeat;
+  background-size: cover;
+}
+
+div.flag::before {
+  background-repeat: repeat;
+  background-size: cover;
+  background-position: center;
+  position: absolute;
+  transform: rotate(-5deg);
+  height: 120%;
+  width: 120%;
+  top: -10%;
+  left: -10%;
+  content: "";
+  z-index: -1;
+  opacity: 0.2;
+  transition: opacity 0.15s ease-in;
+}
+
+div.flag:hover:before {
+  opacity: 0.9;
+}
+
+div.inner-country {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+div.alg::before { background-image: url('../images/flags/alg.svg'); }
+div.arg::before { background-image: url('../images/flags/arg.svg'); }
+div.bel::before { background-image: url('../images/flags/bel.svg'); }
+div.bos::before { background-image: url('../images/flags/bos.svg'); }
+div.chi::before { background-image: url('../images/flags/chi.svg'); }
+div.col::before { background-image: url('../images/flags/col.svg'); }
+div.cot::before { background-image: url('../images/flags/cot.svg'); }
+div.cmr::before { background-image: url('../images/flags/cmr.svg'); }
+div.cro::before { background-image: url('../images/flags/cro.svg'); }
+div.ecu::before { background-image: url('../images/flags/ecu.svg'); }
+div.egy::before { background-image: url('../images/flags/egy.svg'); }
+div.esp::before { background-image: url('../images/flags/esp.svg'); }
+div.ger::before { background-image: url('../images/flags/ger.svg'); }
+div.gha::before { background-image: url('../images/flags/gha.svg'); }
+div.gre::before { background-image: url('../images/flags/gre.svg'); }
+div.hon::before { background-image: url('../images/flags/hon.svg'); }
+div.irn::before { background-image: url('../images/flags/irn.svg'); }
+div.ita::before { background-image: url('../images/flags/ita.svg'); }
+div.kor::before { background-image: url('../images/flags/kor.svg'); }
+div.mor::before { background-image: url('../images/flags/mor.svg'); }
+div.ned::before { background-image: url('../images/flags/ned.svg'); }
+div.pan::before { background-image: url('../images/flags/pan.svg'); }
+div.pol::before { background-image: url('../images/flags/pol.svg'); }
+div.rus::before { background-image: url('../images/flags/rus.svg'); }
+div.sen::before { background-image: url('../images/flags/sen.svg'); }
+div.swe::before { background-image: url('../images/flags/swe.svg'); }
+div.tun::before { background-image: url('../images/flags/tun.svg'); }
+div.aus::before { background-image: url('../images/flags/aus.svg'); }
+div.bra::before { background-image: url('../images/flags/bra.svg'); }
+div.crc::before { background-image: url('../images/flags/crc.svg'); }
+div.den::before { background-image: url('../images/flags/den.svg'); }
+div.eng::before { background-image: url('../images/flags/eng.svg'); }
+div.fra::before { background-image: url('../images/flags/fra.svg'); }
+div.ice::before { background-image: url('../images/flags/ice.svg'); }
+div.jpn::before { background-image: url('../images/flags/jpn.svg'); }
+div.mex::before { background-image: url('../images/flags/mex.svg'); }
+div.nga::before { background-image: url('../images/flags/nga.svg'); }
+div.per::before { background-image: url('../images/flags/per.svg'); }
+div.por::before { background-image: url('../images/flags/por.svg'); }
+div.sau::before { background-image: url('../images/flags/sau.svg'); }
+div.srb::before { background-image: url('../images/flags/srb.svg'); }
+div.sui::before { background-image: url('../images/flags/sui.svg'); }
+div.usa::before { background-image: url('../images/flags/usa.svg'); }
+div.uru::before { background-image: url('../images/flags/uru.svg'); }
