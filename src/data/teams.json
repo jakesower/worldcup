@@ -124,12 +124,24 @@
     "abbreviation": "nga"
   },
   {
+    "name": "New Zealand",
+    "abbreviation": "nzl"
+  },
+  {
     "name": "Panama",
     "abbreviation": "pan"
   },
   {
+    "name": "Paraguay",
+    "abbreviation": "par"
+  },
+  {
     "name": "Peru",
     "abbreviation": "per"
+  },
+  {
+    "name": "North Korea",
+    "abbreviation": "prk"
   },
   {
     "name": "Poland",
@@ -138,6 +150,10 @@
   {
     "name": "Portugal",
     "abbreviation": "por"
+  },
+  {
+    "name": "South Africa",
+    "abbreviation": "rsa"
   },
   {
     "name": "Russia",
@@ -150,6 +166,14 @@
   {
     "name": "Senegal",
     "abbreviation": "sen"
+  },
+  {
+    "name": "Slovakia",
+    "abbreviation": "slk"
+  },
+  {
+    "name": "Slovenia",
+    "abbreviation": "slv"
   },
   {
     "name": "Serbia",

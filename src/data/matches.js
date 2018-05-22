@@ -85,7 +85,7 @@ const final = {
 
 console.log(  [groupMatches, octos, quarters, semis, [third], [final]])
 
-export const matches = reduce(
+export default reduce(
   concat,
   [],
   [groupMatches, octos, quarters, semis, [third], [final]],

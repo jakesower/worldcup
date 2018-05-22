@@ -1,75 +1,80 @@
 import React from 'react';
-import { groupBy, prop, values } from 'ramda';
-import { teamData } from '../team-data';
-import { knockoutMatches } from '../lib/match-functions';
+import { groupBy, is, mapObjIndexed, prop, range, values } from 'ramda';
+import { matches } from '../data'; // TODO
+import { populateBracketSlots } from '../lib/match-functions';
 
-const groups = values(groupBy(prop('group'), teamData));
-const teamLookup = groupBy(t => t.team, teamData);
+export default ({ selected, setViewing, bracket, teamGroups }) => {
+  const bracketSlots = populateBracketSlots(bracket, teamGroups);
 
-export default ({ selected, setViewing, groupRankings }) => {
   function groupPhase() {
-    return groups.map(g => {
-      const groupId = g[0].group;
-      const rankings = groupRankings[groupId];
+    return Object.values(mapObjIndexed((teams, g) => {
+      const rankings = bracket.groups[g];
 
-      const groupTeams = g.map(t => {
-        const rank = rankings.indexOf(t.team);
+      const groupTeams = teams.map((t, tIdx) => {
+        const rank = rankings.indexOf(tIdx);
         const rankMarkup = (rank > -1) ? (<span className="rank">{rank + 1}</span>) : '';
         return (
-          <div className="team" key={t.team} onClick={() => setViewing({ mode: 'group', group: groupId})}>
-            <span className="name">{t.team}</span>
+          <div className="team" key={t.name} onClick={() => setViewing({ mode: 'group', group: g })}>
+            <span className="name">{t.name}</span>
             {rankMarkup}
           </div>
         );
       });
 
       return (
-        <div key={groupId} className={`group${selected === groupId ? " selected" : ""}`}>
-          <h1>Group {groupId}</h1>
+        <div key={g} className={`group${selected === g ? " selected" : ""}`}>
+          <h1>Group {g}</h1>
           {groupTeams}
         </div>
       );
+    }, teamGroups));
+  }
+
+
+  function knockoutPhase(phase, matchesInPhase) {
+    return range(0, matchesInPhase).map(idx => {
+      const matchName = `${phase} ${idx+1}`;
+      const match = matches.find(m => m.name === matchName);
+
+      return knockoutMatch(match, selected === idx);
     });
   }
 
-
-  function knockoutPhase() {
-    const matches = knockoutMatches(groupRankings);
-    const matchId = 1;
-    console.log(matches)
-
-    return matches.map(match => {
-      const [t1, t2] = match.teams.map(prop(teamLookup));
-      return (
-        <div
-          key={match.matchId}
-          className={`group${selected === matchId ? " selected" : ""}`}
-          onClick={() => setViewing({ mode: 'match', match })}
-          >
-          <h3>{`Match ${match.matchId}`}</h3>
-          <div className="team">
-            <span className="name">{t1.team}</span>
-          </div>
-          <div className="team">
-            <span className="name">{t2.team}</span>
-          </div>
+  function knockoutMatch(match, isSelected) {
+    return (
+      <div
+        className={`group${isSelected ? " selected" : ""}`}
+        onClick={() => setViewing({ mode: 'match', matchName: match.name })}
+        >
+        {/* <h3>{`Match ${match.matchId}`}</h3> */}
+        <div className="team">
+          <span className="name">{bracketSlots[match.home].name}</span>
         </div>
-      );
-
-    })
+        <div className="team">
+          <span className="name">{bracketSlots[match.away].name}</span>
+        </div>
+      </div>
+    );
   }
 
+
+  const third = matches.find(m => m.name === 'Match for Third Place');
+  const final = matches.find(m => m.name === 'Final');
 
   return (
     <nav>
       <h2>Group Phase</h2>
       {groupPhase()}
       <h2>Round of 16</h2>
-      {/* {knockoutPhase()} */}
+      {knockoutPhase('Octo', 8)}
       <h2>Quarterfinals</h2>
+      {knockoutPhase('Quarter', 4)}
       <h2>Semifinals</h2>
+      {knockoutPhase('Semi', 2)}
       <h2>Match for 3rd Place</h2>
+      {knockoutMatch(third, false)}
       <h2>Final</h2>
+      {knockoutMatch(final, false)}
     </nav>
   );
 

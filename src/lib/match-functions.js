@@ -1,64 +1,54 @@
-import { addIndex, chain, concat, map } from 'ramda';
+import { addIndex, chain, map, mapObjIndexed, merge, mergeAll, range, reduce } from 'ramda';
+import { pipeThru } from './utils';
+import { matches } from '../data';
 
-const pairsOf = items => {
-  if (items.length < 2) { return [] ;}
-  const [fst, snd, ...rest] = items;
-  return concat([[fst, snd]], pairsOf(rest));
+const iChain = addIndex(chain);
+
+export function populateBracketSlots(bracketState, teamGroups) {
+  function populateKO(populated, round, numSlots) {
+    return pipeThru(range(0, numSlots), [
+      map(idx => {
+        const match = matches.find(m => m.name === `${round} ${idx+1}`);
+        const bracketWinner = bracketState.knockout[`${round} ${idx+1}`];
+        const winner = bracketWinner ?
+          ((bracketWinner === 'home') ? populated[match.home] : populated[match.away]) :
+          { name: `Winner of ${round} ${idx+1}`, abbreviation: 'unknown' };
+        const loser = bracketWinner ?
+          ((bracketWinner === 'home') ? populated[match.away] : populated[match.home]) :
+          { name: `Loser of ${round} ${idx+1}`, abbreviation: 'unknown' };
+
+        return {
+          [`Winner of ${round} ${idx+1}`]: winner,
+          [`Loser of ${round} ${idx+1}`]: loser,
+        };
+      }),
+      mergeAll
+    ]);
+  }
+
+  const rankedInGroup = (rank, group) => {
+    const prefix = (rank === 1) ? 'Winner' : 'Runner-up';
+    const groupBracket = bracketState.groups[group];
+    const rankedInGroup = groupBracket[rank-1];
+    const team = teamGroups[group][rankedInGroup];
+
+    return team || { name: `${prefix} of Group ${group}`, abbreviation: 'unknown' };
+  }
+
+  const groupRanks = pipeThru(teamGroups, [
+    mapObjIndexed(
+      (teams, group) => ({
+        [`Winner of Group ${group}`]: rankedInGroup(1, group),
+        [`Runner-up of Group ${group}`]: rankedInGroup(2, group),
+      })
+    ),
+    Object.values,
+    mergeAll
+  ]);
+
+  return reduce(
+    (acc, [round, numSlots]) => merge(acc, populateKO(acc, round, numSlots)),
+    groupRanks,
+    [['Octo', 8], ['Quarter', 4], ['Semi', 2]]
+  );
 }
-
-const groupNames = ["A", "B", "C", "D", "E", "F", "G", "H"];
-const groupPairs = pairsOf(groupNames);
-
-const unknownTeam = team => ({
-  team,
-  abbreviation: "unknown", // for the image
-});
-
-export function groupWinner(groupRankings, group) {
-  return groupRankings[group][0] || unknownTeam(`Group ${group} Winner`);
-}
-
-export function groupRunnerUp(groupRankings, group) {
-  return groupRankings[group][1] || unknownTeam(`Group ${group} Runner-up`);
-}
-
-function matchWinner(groupRankings, match) {
-
-}
-
-function matchLoser(groupRankings, match) {
-
-}
-
-
-// export function knockoutMatches(groupRankings) {
-//   const w = g => groupWinner(groupRankings, g);
-//   const r = g => groupRunnerUp(groupRankings, g);
-
-//   const octosPairs = [
-//     [w('A'), r('B')],
-//     [w('C'), r('D')],
-//     [w('B'), r('A')],
-//     [w('D'), r('C')],
-//     [w('E'), r('F')],
-//     [w('G'), r('H')],
-//     [w('F'), r('E')],
-//     [w('H'), r('G')],
-//   ];
-
-//   const octos = addIndex(map)(
-//     (teams, i) => ({ teams, matchId: `octos-${i+1}` }),
-//     octosPairs
-//   );
-
-//   const quarters = addIndex(map)(
-//     (teams, i) => ({ teams, matchId: `quarters-${i+1}` }),
-//     pairsOf(octos)
-//   );
-
-//   const quarters = addIndex(map)(
-//     (teams, i) => ({ teams, matchId: `semis-${i+1}` }),
-//     pairsOf(octos)
-//   );
-
-// }

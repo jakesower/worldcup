@@ -78,10 +78,17 @@ main::before {
   content: "";
 }
 
-div.country {
+main.spread-flags div.country {
   font-size: 10vh;
   position: relative;
   width: 50%;
+  overflow: hidden;
+}
+
+main.stack-flags div.country {
+  font-size: 10vh;
+  position: relative;
+  width: 100%;
   overflow: hidden;
 }
 
@@ -119,7 +126,7 @@ div.flag::before {
   background-size: cover;
   background-position: center;
   position: absolute;
-  transform: rotate(-5deg);
+  transform: rotate(-2deg);
   height: 120%;
   width: 120%;
   top: -10%;
@@ -127,11 +134,11 @@ div.flag::before {
   content: "";
   z-index: -1;
   opacity: 0.2;
-  transition: opacity 0.15s ease-in;
+  transition: opacity 0.1s ease-in;
 }
 
 div.flag:hover:before {
-  opacity: 0.9;
+  opacity: 1;
 }
 
 div.inner-country {
@@ -145,7 +152,7 @@ div.inner-country {
 div.alg::before { background-image: url('../images/flags/alg.svg'); }
 div.arg::before { background-image: url('../images/flags/arg.svg'); }
 div.bel::before { background-image: url('../images/flags/bel.svg'); }
-div.bos::before { background-image: url('../images/flags/bos.svg'); }
+div.bih::before { background-image: url('../images/flags/bos.svg'); }
 div.chi::before { background-image: url('../images/flags/chi.svg'); }
 div.col::before { background-image: url('../images/flags/col.svg'); }
 div.cot::before { background-image: url('../images/flags/cot.svg'); }
@@ -163,12 +170,19 @@ div.ita::before { background-image: url('../images/flags/ita.svg'); }
 div.kor::before { background-image: url('../images/flags/kor.svg'); }
 div.mor::before { background-image: url('../images/flags/mor.svg'); }
 div.ned::before { background-image: url('../images/flags/ned.svg'); }
+div.nzl::before { background-image: url('../images/flags/nzl.svg'); }
 div.pan::before { background-image: url('../images/flags/pan.svg'); }
+div.par::before { background-image: url('../images/flags/par.svg'); }
+div.prk::before { background-image: url('../images/flags/prk.svg'); }
 div.pol::before { background-image: url('../images/flags/pol.svg'); }
+div.rsa::before { background-image: url('../images/flags/rsa.svg'); }
 div.rus::before { background-image: url('../images/flags/rus.svg'); }
 div.sen::before { background-image: url('../images/flags/sen.svg'); }
+div.slk::before { background-image: url('../images/flags/slk.svg'); }
+div.slv::before { background-image: url('../images/flags/slv.svg'); }
 div.swe::before { background-image: url('../images/flags/swe.svg'); }
 div.tun::before { background-image: url('../images/flags/tun.svg'); }
+
 div.aus::before { background-image: url('../images/flags/aus.svg'); }
 div.bra::before { background-image: url('../images/flags/bra.svg'); }
 div.crc::before { background-image: url('../images/flags/crc.svg'); }
@@ -186,3 +200,5 @@ div.srb::before { background-image: url('../images/flags/srb.svg'); }
 div.sui::before { background-image: url('../images/flags/sui.svg'); }
 div.usa::before { background-image: url('../images/flags/usa.svg'); }
 div.uru::before { background-image: url('../images/flags/uru.svg'); }
+
+div.unknown::before { background-image: url('../images/flags/unknown.svg'); }

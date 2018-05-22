@@ -1,11 +1,19 @@
 import React, { Component, Fragment } from 'react';
-import ReactDOM from 'react-dom';
-import { lensPath, set } from 'ramda';
+import { render } from 'react-dom';
+import { chain, lensPath, map, set } from 'ramda';
 
-import { teamData } from './team-data';
-import ViewGroup from './components/view-group.jsx';
-import ViewMatch from './components/view-match.jsx';
-import Brackets from './components/brackets.jsx';
+import { draws, matches, teams } from './data';
+
+import ViewGroup from './components/view-group';
+import ViewMatch from './components/view-match';
+import Brackets from './components/brackets';
+import { populateBracketSlots } from './lib/match-functions';
+
+const tournamentDraws = draws['2010'];
+const tournamentGroups = map(
+  draw => chain(d => teams[d], draw),
+  tournamentDraws
+);
 
 class WCApp extends Component {
   constructor() {
@@ -16,47 +24,49 @@ class WCApp extends Component {
         mode: "group",
         group: "A",
       },
-      groupRankings: {
-        A: [],
-        B: [],
-        C: [],
-        D: [],
-        E: [],
-        F: [],
-        G: [],
-        H: [],
-      },
-      knockoutWinners: {
-        "octos-1": null,
-        "octos-2": null,
-        "octos-3": null,
-        "octos-4": null,
-        "octos-5": null,
-        "octos-6": null,
-        "octos-7": null,
-        "octos-8": null,
-        "quarters-1": null,
-        "quarters-2": null,
-        "quarters-3": null,
-        "quarters-4": null,
-        "semis-1": null,
-        "semis-2": null,
-        third: null,
-        final: null,
+      bracket: {
+        groups: {
+          A: [],
+          B: [],
+          C: [],
+          D: [],
+          E: [],
+          F: [],
+          G: [],
+          H: [],
+        },
+        knockout: {
+          'Octo 1': null,
+          'Octo 2': null,
+          'Octo 3': null,
+          'Octo 4': null,
+          'Octo 5': null,
+          'Octo 6': null,
+          'Octo 7': null,
+          'Octo 8': null,
+          'Quarter 1': null,
+          'Quarter 2': null,
+          'Quarter 3': null,
+          'Quarter 4': null,
+          'Semi 1': null,
+          'Semi 2': null,
+          'Third': null,
+          'Final': null,
+        }
       }
     }
   }
 
 
   viewGroup() {
-    const { viewing } = this.state;
-    const groupTeams = teamData.filter(team => team.group === viewing.group);
-    const rankings = this.state.groupRankings[viewing.group];
-    const handleTeamClick = team => {
-      const lens = lensPath(['groupRankings', viewing.group]);
-      const next = rankings.includes(team) ?
-        rankings.filter(t => t !== team) :
-        rankings.concat(team);
+    const { bracket, viewing } = this.state;
+    const groupTeams = tournamentGroups[viewing.group];
+    const rankings = bracket.groups[viewing.group];
+    const handleTeamClick = teamIdx => {
+      const lens = lensPath(['bracket', 'groups', viewing.group]);
+      const next = rankings.includes(teamIdx) ?
+        rankings.filter(t => t !== teamIdx) :
+        rankings.concat(teamIdx);
 
       this.setState(set(lens, next, this.state));
     };
@@ -67,11 +77,18 @@ class WCApp extends Component {
 
   viewMatch() {
     const { viewing } = this.state;
+    const bracket = populateBracketSlots(this.state.bracket, tournamentGroups);
+    const match = matches.find(m => m.name === viewing.matchName);
+    console.log({ match, bracket })
 
     return ( <ViewMatch
-      teams={matchTeams}
-      winner={this.state.knockoutWinners[viewing.match]}
-      handleTeamClick={() => {}}
+      match={match}
+      bracket={bracket}
+      handleTeamClick={t => {
+        const lens = lensPath(['bracket', 'knockout', match.name]);
+        const next = (bracket[match.name] === t) ? null : t;
+        this.setState(set(lens, next, this.state));
+      }}
     /> );
   }
 
@@ -96,11 +113,12 @@ class WCApp extends Component {
         <Brackets
           selected={viewing.group}
           setViewing={setViewing}
-          groupRankings={this.state.groupRankings}
+          bracket={this.state.bracket}
+          teamGroups={tournamentGroups}
         />
       </div>
     </Fragment> );
   }
 }
 
-ReactDOM.render(<WCApp></WCApp>, document.getElementById("app"));
+render(<WCApp></WCApp>, document.getElementById("app"));

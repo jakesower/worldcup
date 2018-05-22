@@ -1,21 +1,21 @@
 import React from 'react';
 
 export default ({ teams, rankings, handleTeamClick }) => {
-  const markup = teams.map(t => {
-    const rank = rankings.indexOf(t.team);
+  const markup = teams.map((t, idx) => {
+    const rank = rankings.indexOf(idx);
     const rankMarkup = (rank > -1) ? (<div className="rank">{rank + 1}</div>) : '';
 
     return (
-      <div key={t.team} className={`country flag ${t.abbreviation}`} onClick={() => handleTeamClick(t.team)}>
+      <div key={t.name} className={`country flag ${t.abbreviation}`} onClick={() => handleTeamClick(idx)}>
         <div className="inner-country">
-          <h1>{t.team}</h1>
+          <h1>{t.name}</h1>
           {rankMarkup}
         </div>
       </div>
     )
   })
 
-  return ( <main>
+  return ( <main className="spread-flags">
     {markup}
   </main> )
 };
