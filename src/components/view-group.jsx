@@ -15,7 +15,7 @@ export default ({ teams, rankings, handleTeamClick }) => {
     )
   })
 
-  return ( <main className="spread-flags">
+  return ( <main className="stack-flags">
     {markup}
   </main> )
 };

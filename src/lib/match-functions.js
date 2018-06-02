@@ -8,18 +8,19 @@ export function populateBracketSlots(bracketState, teamGroups) {
   function populateKO(populated, round, numSlots) {
     return pipeThru(range(0, numSlots), [
       map(idx => {
-        const match = matches.find(m => m.name === `${round} ${idx+1}`);
-        const bracketWinner = bracketState.knockout[`${round} ${idx+1}`];
+        const roundNum = (numSlots > 1) ? ` ${idx+1}` : '';
+        const match = matches.find(m => m.name === `${round}${roundNum}`);
+        const bracketWinner = bracketState.knockout[`${round}${roundNum}`];
         const winner = bracketWinner ?
           ((bracketWinner === 'home') ? populated[match.home] : populated[match.away]) :
-          { name: `Winner of ${round} ${idx+1}`, abbreviation: 'unknown' };
+          { name: `Winner of ${round}${roundNum}`, abbreviation: 'unknown' };
         const loser = bracketWinner ?
           ((bracketWinner === 'home') ? populated[match.away] : populated[match.home]) :
-          { name: `Loser of ${round} ${idx+1}`, abbreviation: 'unknown' };
+          { name: `Loser of ${round}${roundNum}`, abbreviation: 'unknown' };
 
         return {
-          [`Winner of ${round} ${idx+1}`]: winner,
-          [`Loser of ${round} ${idx+1}`]: loser,
+          [`Winner of ${round}${roundNum}`]: winner,
+          [`Loser of ${round}${roundNum}`]: loser,
         };
       }),
       mergeAll
@@ -49,6 +50,6 @@ export function populateBracketSlots(bracketState, teamGroups) {
   return reduce(
     (acc, [round, numSlots]) => merge(acc, populateKO(acc, round, numSlots)),
     groupRanks,
-    [['Octo', 8], ['Quarter', 4], ['Semi', 2]]
+    [['Octo', 8], ['Quarter', 4], ['Semi', 2], ['Match for Third Place', 1], ['Final', 1]]
   );
 }

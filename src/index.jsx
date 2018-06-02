@@ -9,7 +9,7 @@ import ViewMatch from './components/view-match';
 import Brackets from './components/brackets';
 import { populateBracketSlots } from './lib/match-functions';
 
-const tournamentDraws = draws['2010'];
+const tournamentDraws = draws['2018'];
 const tournamentGroups = map(
   draw => chain(d => teams[d], draw),
   tournamentDraws

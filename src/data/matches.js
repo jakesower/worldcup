@@ -73,14 +73,14 @@ const third = {
   id: 63,
   name: 'Match for Third Place',
   home: `Loser of Semi 1`,
-  away: `Loser of Semi 1`,
+  away: `Loser of Semi 2`,
 };
 
 const final = {
   id: 64,
   name: 'Final',
   home: `Winner of Semi 1`,
-  away: `Winner of Semi 1`,
+  away: `Winner of Semi 2`,
 };
 
 console.log(  [groupMatches, octos, quarters, semis, [third], [final]])
