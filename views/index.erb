@@ -1,0 +1,35 @@
+<div class="group-config">
+  <div class="question-container">
+    <div class="f" style="margin-right: 3vw;">
+      <img src="/images/logo.svg">
+    </div>
+
+    <div class="f" style="flex-grow: 1;">
+      <h1>World Cup Brackets</h1>
+
+      <form action="/create" method="POST">
+        <% if @error %>
+          <div class="error">
+            There's already a group with that name. Pick another.
+          </div>
+        <% end %>
+
+        <div class="question">
+          <label>Group Name</label>
+          <input name="name" type="text" required pattern="[-A-Za-z0-9_]+" value="<%= @name %>">
+          <div class="hint">The name of your group. Use letters, numbers, underscores, and dashes only please. It will be part of the URL you invite others to. You can create as many groups as you like, but the names must all be unique.</div>
+        </div>
+
+        <div class="question">
+          <label>Admin Password</label>
+          <input name="admin_password" type="text" required value="<%= @admin_password %>">
+          <div class="hint">Use this to close brackets and other stuff.</div>
+        </div>
+
+        <div class="question">
+          <input type="submit" value="Create Group">
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
