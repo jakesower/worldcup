@@ -83,8 +83,6 @@ const final = {
   away: `Winner of Semi 2`,
 };
 
-console.log(  [groupMatches, octos, quarters, semis, [third], [final]])
-
 export default reduce(
   concat,
   [],
