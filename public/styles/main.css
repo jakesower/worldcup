@@ -9,6 +9,14 @@ body {
   padding: 0;
   background-image: url('../images/bg.jpg');
   background-size: cover;
+  font-size: 3vh;
+  /* overflow-x: hidden; */
+}
+
+input, button {
+  font-size: 3vh;
+  font-family: Dusha;
+  display: block;
 }
 
 .main-wrapper {
@@ -16,19 +24,27 @@ body {
   flex-direction: row;
   flex-grow: 1;
   position: relative;
+  height: 100%;
 }
 
 .app-wrapper {
   display: flex;
   flex-direction: column;
+  height: 100vh;
+  position: relative;
 }
 
 aside {
   background-color: gold;
   opacity: 0.8;
   font-size: 3vh;
-  padding: 1px 0;
+  padding: 5px;
   margin: 0;
+
+}
+
+aside h1 {
+  font-size: 120%;
 }
 
 nav {
@@ -37,8 +53,8 @@ nav {
   order: 1;
   padding: 0 20px;
   font-size: 2.5vh;
-  height: 100vh;
   overflow-y: auto;
+  height: 100%;
 }
 
 nav h1 {
@@ -49,8 +65,8 @@ nav h1 {
 
 nav h3 {
   font-size: 90%;
-  margin-bottom: 0.2em;
-  margin-top: 0.5em;
+  /* margin-bottom: 0.2em; */
+  /* margin-top: 0.5em; */
 }
 
 nav .group {
@@ -91,13 +107,33 @@ main::before {
   content: "";
 }
 
-.group-config {
+div.group-config {
   position: absolute;
-  top: 0; bottom: 0; left: 0; right: 0;
+  top: 0; left: 0; bottom: 0; right: 0;
+  margin: auto;
+  width: 70vw;
+  height: 50vh;
 }
 
-.question-wrapper {
+div.question-container {
+  position: relative;
   display: flex;
+}
+
+.error {
+  color: #C00;
+}
+
+div.group-config div.question {
+  margin-top: 3vh;
+}
+
+div.group-config h1 {
+  margin: 0;
+}
+
+div.group-config div.question .hint {
+  font-size: 70%;
 }
 
 main.spread-flags div.country {

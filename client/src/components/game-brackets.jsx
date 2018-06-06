@@ -17,6 +17,7 @@ export default class GameBrackets extends Component {
         mode: "group",
         group: "A",
       },
+      messageVisible: true,
       bracket: {
         groups: {
           A: [],
@@ -86,6 +87,7 @@ export default class GameBrackets extends Component {
 
 
   render() {
+    const self = this;
     const { viewing } = this.state;
     const main = (() => {
       const mode = this.state.viewing.mode;
@@ -98,11 +100,22 @@ export default class GameBrackets extends Component {
 
     const setViewing = viewing => this.setState({ viewing });
 
-    return <div class="app-wrapper">
-      <aside>
-        Oh hai
+    return <div className="app-wrapper">
+      <aside style={this.state.messageVisible ? {} : {display: 'none'}}>
+        <span>Select teams in the order you believe they will place in each group. After that, work your way through the knockout rounds!</span>
+        <h1>Scoring for correct picks:</h1>
+        <ul>
+          <li>Winner of Group: 2pts</li>
+          <li>Runner-up of Group: 2pts</li>
+          <li>Round of 16 (Octos): 3pts</li>
+          <li>Quarterfinals: 5pts</li>
+          <li>Semifinals: 8pts</li>
+          <li>Third Place: 1pt</li>
+          <li>Champion: 13pts</li>
+        </ul>
+        <button onClick={() => self.setState({ messageVisible: false })}>Got It</button>
       </aside>
-      <div class="main-wrapper">
+      <div className="main-wrapper">
         { main }
         <div className="nav-wrapper">
           <Brackets

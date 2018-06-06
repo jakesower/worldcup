@@ -36,22 +36,27 @@ export default ({ selected, setViewing, bracket, teamGroups }) => {
       const matchName = `${phase} ${idx+1}`;
       const match = matches.find(m => m.name === matchName);
 
-      return knockoutMatch(match, selected === idx);
+      return knockoutMatch(match, selected === idx, idx);
     });
   }
 
-  function knockoutMatch(match, isSelected) {
+  function knockoutMatch(match, isSelected, idx) {
+    const winner = bracket.knockout[match.name];
+    const winnerMarkup = <span className="rank">✔</span>;
+
     return (
       <div
+        key={idx}
         className={`group${isSelected ? " selected" : ""}`}
         onClick={() => setViewing({ mode: 'match', matchName: match.name })}
         >
-        {/* <h3>{`Match ${match.matchId}`}</h3> */}
         <div className="team">
           <span className="name">{bracketSlots[match.home].name}</span>
+            { winner === 'home' ? winnerMarkup : '' }
         </div>
         <div className="team">
           <span className="name">{bracketSlots[match.away].name}</span>
+          { winner === 'away' ? winnerMarkup : '' }
         </div>
       </div>
     );
@@ -64,16 +69,22 @@ export default ({ selected, setViewing, bracket, teamGroups }) => {
   return (
     <nav>
       <h2>Group Phase</h2>
+      <h3>2pts for 1st; 2pts for 2nd</h3>
       {groupPhase()}
       <h2>Round of 16</h2>
+      <h3>3pts</h3>
       {knockoutPhase('Octo', 8)}
       <h2>Quarterfinals</h2>
+      <h3>5pts</h3>
       {knockoutPhase('Quarter', 4)}
       <h2>Semifinals</h2>
+      <h3>8pts</h3>
       {knockoutPhase('Semi', 2)}
       <h2>Match for 3rd Place</h2>
+      <h3>1pt</h3>
       {knockoutMatch(third, false)}
       <h2>Final</h2>
+      <h3>13pts</h3>
       {knockoutMatch(final, false)}
     </nav>
   );
