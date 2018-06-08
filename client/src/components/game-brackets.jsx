@@ -1,9 +1,10 @@
-import React, { Component, Fragment } from 'react';
-import { chain, lensPath, map, set } from 'ramda';
+import React, { Component } from 'react';
+import { lensPath, set } from 'ramda';
 
 import ViewGroup from '../components/view-group';
 import ViewMatch from '../components/view-match';
 import Brackets from '../components/brackets';
+import BracketNav from '../components/bracket-nav';
 import { populateBracketSlots } from '../lib/match-functions';
 
 export default class GameBrackets extends Component {
@@ -12,12 +13,13 @@ export default class GameBrackets extends Component {
     this.groups = props.groups;
     this.matches = props.matches;
 
-    this.state = {
+    const initState = {
+      navViewing: "Group",
       viewing: {
         mode: "group",
         group: "A",
       },
-      messageVisible: true,
+      messageVisible: false,
       bracket: {
         groups: {
           A: [],
@@ -30,14 +32,14 @@ export default class GameBrackets extends Component {
           H: [],
         },
         knockout: {
-          'Octo 1': null,
-          'Octo 2': null,
-          'Octo 3': null,
-          'Octo 4': null,
-          'Octo 5': null,
-          'Octo 6': null,
-          'Octo 7': null,
-          'Octo 8': null,
+          'Ro16 1': null,
+          'Ro16 2': null,
+          'Ro16 3': null,
+          'Ro16 4': null,
+          'Ro16 5': null,
+          'Ro16 6': null,
+          'Ro16 7': null,
+          'Ro16 8': null,
           'Quarter 1': null,
           'Quarter 2': null,
           'Quarter 3': null,
@@ -49,6 +51,9 @@ export default class GameBrackets extends Component {
         }
       }
     }
+
+    const savedState = window.worldcup && window.sessionStorage.getItem(window.worldcup.group);
+    this.state = savedState ? JSON.parse(savedState) : initState;
   }
 
 
@@ -87,6 +92,7 @@ export default class GameBrackets extends Component {
 
 
   render() {
+    console.log(this.state);
     const self = this;
     const { viewing } = this.state;
     const main = (() => {
@@ -99,6 +105,7 @@ export default class GameBrackets extends Component {
     })();
 
     const setViewing = viewing => this.setState({ viewing });
+    const setNavViewing = navViewing => this.setState({ navViewing });
 
     return <div className="app-wrapper">
       <aside style={this.state.messageVisible ? {} : {display: 'none'}}>
@@ -107,7 +114,7 @@ export default class GameBrackets extends Component {
         <ul>
           <li>Winner of Group: 2pts</li>
           <li>Runner-up of Group: 2pts</li>
-          <li>Round of 16 (Octos): 3pts</li>
+          <li>Round of 16 (Ro16s): 3pts</li>
           <li>Quarterfinals: 5pts</li>
           <li>Semifinals: 8pts</li>
           <li>Third Place: 1pt</li>
@@ -118,14 +125,23 @@ export default class GameBrackets extends Component {
       <div className="main-wrapper">
         { main }
         <div className="nav-wrapper">
-          <Brackets
-            selected={viewing.group}
+          <BracketNav
+            viewing={viewing}
+            selectedNavViewing={this.state.navViewing}
             setViewing={setViewing}
+            setNavViewing={setNavViewing}
             bracket={this.state.bracket}
             teamGroups={this.groups}
           />
         </div>
       </div>
     </div>
+  }
+
+  componentDidUpdate() {
+    if (window.worldcup) {
+      window.sessionStorage.setItem(window.worldcup.group, JSON.stringify(this.state));
+      console.log(this.state)
+    }
   }
 }

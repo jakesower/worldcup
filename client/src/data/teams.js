@@ -89,7 +89,7 @@ export default [
   },
   {
     "name": "Iceland",
-    "abbreviation": "ice"
+    "abbreviation": "isl"
   },
   {
     "name": "Italy",

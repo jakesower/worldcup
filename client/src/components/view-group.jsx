@@ -6,7 +6,8 @@ export default ({ teams, rankings, handleTeamClick }) => {
     const rankMarkup = (rank > -1) ? (<div className="rank">{rank + 1}</div>) : '';
 
     return (
-      <div key={t.name} className={`country flag ${t.abbreviation}`} onClick={() => handleTeamClick(idx)}>
+      <div key={t.name} className="country" onClick={() => handleTeamClick(idx)}>
+        <div className={`flag ${t.abbreviation}`}/>
         <div className="inner-country">
           <h1>{t.name}</h1>
           {rankMarkup}
@@ -15,7 +16,7 @@ export default ({ teams, rankings, handleTeamClick }) => {
     )
   })
 
-  return ( <main className="stack-flags">
+  return ( <main className="flags">
     {markup}
   </main> )
 };

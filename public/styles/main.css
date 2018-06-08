@@ -1,3 +1,14 @@
+@media (max-aspect-ratio: 10/16) {
+  main.flags div.country {
+    width: 100%!important;
+  }
+
+  .group-config {
+    width: 90vw!important;
+    height: 90vh!important;
+  }
+}
+
 @font-face {
   font-family: "Dusha";
   src: url("../fonts/dusha.woff2");
@@ -21,10 +32,10 @@ input, button {
 
 .main-wrapper {
   display: flex;
-  flex-direction: row;
-  flex-grow: 1;
+  flex-direction: column;
   position: relative;
   height: 100%;
+  width: 100%;
 }
 
 .app-wrapper {
@@ -40,27 +51,49 @@ aside {
   font-size: 3vh;
   padding: 5px;
   margin: 0;
-
 }
 
 aside h1 {
   font-size: 120%;
 }
 
-nav {
-  min-width: 300px;
+.nav-wrapper {
   flex-grow: 0;
-  order: 1;
-  padding: 0 20px;
-  font-size: 2.5vh;
+  order: -1;
   overflow-y: auto;
-  height: 100%;
+  width: 100%;
+  position: relative;
+  padding-bottom: 0.5vh;
 }
 
-nav h1 {
-  font-size: 120%;
-  margin-bottom: 0.2em;
-  margin-top: 0;
+nav {
+  font-size: 3vh;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  border-bottom: 1px solid black;
+  padding: 5px 0;
+}
+
+nav.titleNav {
+  flex-wrap: nowrap;
+}
+
+nav.titleNav h1 {
+  text-align: center;
+  min-width: 10%;
+  /* width: calc(100% / 3); */
+}
+
+.nobr {
+  white-space: nowrap;
+}
+
+nav h2 {
+  font-size: 80%;
+  margin: 0;
+  display: inline-block;
+  vertical-align: center;
 }
 
 nav h3 {
@@ -71,8 +104,26 @@ nav h3 {
 
 nav .group {
   border-radius: 1vh;
-  padding: 0.5vh 1vh;
+  padding: 1vh;
+  margin: 0 1vh;
   cursor: pointer;
+  display: flex;
+}
+
+nav .group div {
+  margin: 0;
+  padding: 1vh;
+  flex-grow: 1;
+  font-size: 80%;
+  text-transform: uppercase;
+}
+
+nav .group .group-winners {
+  padding: 0 1vh;
+}
+
+nav .group .group-winners div {
+  padding: 0;
 }
 
 nav .group:hover {
@@ -82,6 +133,35 @@ nav .group:hover {
 nav .group.selected {
   background-color: rgba(255, 255, 255, 0.7);
   border: 2px solid black;
+}
+
+nav .group:not(.selected) {
+  padding: calc(1vh + 2px);
+}
+
+nav .team {
+  margin: 0;
+  font-size: 80%;
+  text-transform: uppercase;
+}
+
+nav h1 {
+  font-size: 100%;
+  margin: 0;
+  display: inline-block;
+  text-align: center;
+  padding: 2px;
+  border-radius: 2px;
+}
+
+nav h1.loser {
+  text-decoration: line-through;
+  opacity: 0.5;
+}
+
+nav h1.winner {
+  font-weight: bold;
+  background-color: gold;
 }
 
 nav .group .team .rank {
@@ -95,6 +175,8 @@ main {
   flex-grow: 1;
   order: 0;
   position: relative;
+  width: 100%;
+  padding-top: 2px;
 }
 
 main::before {
@@ -136,20 +218,6 @@ div.group-config div.question .hint {
   font-size: 70%;
 }
 
-main.spread-flags div.country {
-  font-size: 10vh;
-  position: relative;
-  width: 70%;
-  overflow: hidden;
-}
-
-main.stack-flags div.country {
-  font-size: 10vh;
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-}
-
 div.country h1 {
   position: absolute;
   top: 1vh;
@@ -179,23 +247,33 @@ div.country div.rank {
   background-size: cover;
 }
 
+main.flags div.country {
+  font-size: 10vh;
+  position: relative;
+  width: 50%;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+div.flag {
+  display: block;
+  height: 100%;
+}
+
 div.flag::before {
-  background-repeat: repeat;
-  background-size: cover;
-  background-position: center;
-  position: absolute;
-  transform: rotate(-3deg);
-  height: 140%;
-  width: 65%;
-  top: -20%;
-  left: 40%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center center;
+  display: block;
+  height: 120%;
+  transform: translate(2vh, -2vh);
   content: "";
   z-index: -1;
   opacity: 0.4;
   transition: opacity 0.1s ease-in;
 }
 
-div.flag:hover:before {
+div.country:hover div.flag::before {
   opacity: 1;
 }
 
@@ -224,6 +302,7 @@ div.gha::before { background-image: url('../images/flags/gha.svg'); }
 div.gre::before { background-image: url('../images/flags/gre.svg'); }
 div.hon::before { background-image: url('../images/flags/hon.svg'); }
 div.irn::before { background-image: url('../images/flags/irn.svg'); }
+div.isl::before { background-image: url('../images/flags/isl.svg'); }
 div.ita::before { background-image: url('../images/flags/ita.svg'); }
 div.kor::before { background-image: url('../images/flags/kor.svg'); }
 div.mor::before { background-image: url('../images/flags/mor.svg'); }
@@ -247,7 +326,6 @@ div.crc::before { background-image: url('../images/flags/crc.svg'); }
 div.den::before { background-image: url('../images/flags/den.svg'); }
 div.eng::before { background-image: url('../images/flags/eng.svg'); }
 div.fra::before { background-image: url('../images/flags/fra.svg'); }
-div.ice::before { background-image: url('../images/flags/ice.svg'); }
 div.jpn::before { background-image: url('../images/flags/jpn.svg'); }
 div.mex::before { background-image: url('../images/flags/mex.svg'); }
 div.nga::before { background-image: url('../images/flags/nga.svg'); }

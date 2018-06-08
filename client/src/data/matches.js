@@ -38,23 +38,23 @@ export const groupMatches = iChain(
 const gw = g => `Winner of Group ${g}`;
 const gr = g => `Runner-up of Group ${g}`;
 
-const octos = [
-  { id: 49, name: 'Octo 1', home: gw('A'), away: gr('B') },
-  { id: 50, name: 'Octo 2', home: gw('C'), away: gr('D') },
-  { id: 51, name: 'Octo 3', home: gw('B'), away: gr('A') },
-  { id: 52, name: 'Octo 4', home: gw('D'), away: gr('C') },
-  { id: 53, name: 'Octo 5', home: gw('E'), away: gr('F') },
-  { id: 54, name: 'Octo 6', home: gw('G'), away: gr('H') },
-  { id: 55, name: 'Octo 7', home: gw('F'), away: gr('E') },
-  { id: 56, name: 'Octo 8', home: gw('H'), away: gr('G') },
+const Ro16s = [
+  { id: 49, name: 'Ro16 1', home: gw('A'), away: gr('B') },
+  { id: 50, name: 'Ro16 2', home: gw('C'), away: gr('D') },
+  { id: 51, name: 'Ro16 3', home: gw('B'), away: gr('A') },
+  { id: 52, name: 'Ro16 4', home: gw('D'), away: gr('C') },
+  { id: 53, name: 'Ro16 5', home: gw('E'), away: gr('F') },
+  { id: 54, name: 'Ro16 6', home: gw('G'), away: gr('H') },
+  { id: 55, name: 'Ro16 7', home: gw('F'), away: gr('E') },
+  { id: 56, name: 'Ro16 8', home: gw('H'), away: gr('G') },
 ];
 
 const quarters = iMap(
   (o, i) => ({
     id: i + 57,
     name: `Quarter ${i+1}`,
-    home: `Winner of Octo ${(i*2)+1}`,
-    away: `Winner of Octo ${(i*2)+2}`,
+    home: `Winner of Ro16 ${(i*2)+1}`,
+    away: `Winner of Ro16 ${(i*2)+2}`,
   }),
   [1,2,3,4],
 );
@@ -86,5 +86,5 @@ const final = {
 export default reduce(
   concat,
   [],
-  [groupMatches, octos, quarters, semis, [third], [final]],
+  [groupMatches, Ro16s, quarters, semis, [third], [final]],
 );

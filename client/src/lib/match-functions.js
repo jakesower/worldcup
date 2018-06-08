@@ -50,6 +50,6 @@ export function populateBracketSlots(bracketState, teamGroups) {
   return reduce(
     (acc, [round, numSlots]) => merge(acc, populateKO(acc, round, numSlots)),
     groupRanks,
-    [['Octo', 8], ['Quarter', 4], ['Semi', 2], ['Match for Third Place', 1], ['Final', 1]]
+    [['Ro16', 8], ['Quarter', 4], ['Semi', 2], ['Match for Third Place', 1], ['Final', 1]]
   );
 }
