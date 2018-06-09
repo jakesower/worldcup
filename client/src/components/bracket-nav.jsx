@@ -17,6 +17,7 @@ export default ({ viewing, setViewing, selectedNavViewing, setNavViewing, bracke
     const d = (stage === 'Group') ? { mode: 'group', group: 'A' }
             : (stage === 'Third') ? { mode: 'match', matchName: 'Match for Third Place' }
             : (stage === 'Final') ? { mode: 'match', matchName: 'Final' }
+            : (stage === 'Submit Bracket') ? { mode: 'submit', matchName: 'Final' }
                                   : { mode: 'match', matchName: `${stage} 1` };
     setViewing(d);
     setNavViewing(stage);
@@ -49,20 +50,19 @@ export default ({ viewing, setViewing, selectedNavViewing, setNavViewing, bracke
   //   { nextStage ? nextMarkup : '' }
   // </nav>
 
+  const title = () => <h1>
+    <span className="nobr">{ `${stageTitle(selectedNavViewing)} ` }</span>
+    { pts ? <span className="nobr">{ `(${pts} pt${pts === 1 ? '' : 's'})` }</span> : '' }
+  </h1>
+
+
   return <Fragment>
     <nav className="titleNav">
       <h1 className="nobr">{ prevStage ? prevMarkup : '' }</h1>
-      <div className="group">
-        <h1>
-          <span className="nobr">{ `${stageTitle(selectedNavViewing)} ` }</span>
-          <span className="nobr">{ `(${pts} pt${pts === 1 ? '' : 's'})` }</span>
-        </h1>
-      </div>
+      <div className="group">{ title() }</div>
       <h1 className="nobr">{ nextStage ? nextMarkup : '' }</h1>
     </nav>
-    <nav>
-      {getNav()}
-    </nav>
+    { getNav() }
   </Fragment>
 
 
@@ -70,13 +70,13 @@ export default ({ viewing, setViewing, selectedNavViewing, setNavViewing, bracke
   function getNav() {
     switch(selectedNavViewing) {
       case "Group":
-        return <Fragment>
+        return <nav>
           {groupPhase()}
-        </Fragment>
+        </nav>
       case "Ro16":
       case "Quarter":
       case "Semi":
-        return knockoutPhase(selectedNavViewing);
+        return <nav>{ knockoutPhase(selectedNavViewing) }</nav>;
     }
   }
 
@@ -125,6 +125,7 @@ export default ({ viewing, setViewing, selectedNavViewing, setNavViewing, bracke
   // }
 
   function knockoutMatch(match, isSelected, idx) {
+    console.log(bracketSlots)
     const unk = x => x === 'unknown' ? '???' : x;
     const winner = bracket.knockout[match.name];
     const homeState = (winner === 'home') ? ' winner' : (winner === 'away' ? ' loser' : '');

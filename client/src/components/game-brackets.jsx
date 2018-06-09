@@ -3,7 +3,7 @@ import { lensPath, set } from 'ramda';
 
 import ViewGroup from '../components/view-group';
 import ViewMatch from '../components/view-match';
-import Brackets from '../components/brackets';
+import Submit from './submit';
 import BracketNav from '../components/bracket-nav';
 import { populateBracketSlots } from '../lib/match-functions';
 
@@ -46,7 +46,7 @@ export default class GameBrackets extends Component {
           'Quarter 4': null,
           'Semi 1': null,
           'Semi 2': null,
-          'Third': null,
+          'Match for Third Place': null,
           'Final': null,
         }
       }
@@ -91,6 +91,16 @@ export default class GameBrackets extends Component {
   }
 
 
+  viewSubmit() {
+    // const bracket = populateBracketSlots(this.state.bracket, this.groups);
+
+    return <Submit
+      bracket={this.state.bracket}
+      teamGroups={this.groups}
+    />
+  }
+
+
   render() {
     console.log(this.state);
     const self = this;
@@ -101,6 +111,8 @@ export default class GameBrackets extends Component {
         return this.viewGroup();
       } else if (mode === 'match') {
         return this.viewMatch();
+      } else {
+        return this.viewSubmit();
       }
     })();
 

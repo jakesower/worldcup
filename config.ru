@@ -8,7 +8,6 @@ require 'bcrypt'
 class App < Roda
   plugin :render
   plugin :static, ['/fonts', '/images', '/js', '/styles']
-  # opts[:layout] = 'layout'
 
   def result_to_a res
     res.map{|x| x}
@@ -19,9 +18,27 @@ class App < Roda
       view("index", template: 'layout')
     end
 
-    r.get "games", String do |game_name|
+    r.on "games", String do |game_name|
       @name = game_name
-      view("brackets", template: 'layout')
+
+      r.is do
+        r.get do
+          view("brackets", template: 'layout')
+        end
+      end
+
+      r.get "view" do
+        players_q = @@db.prepare("select player from brackets where game = ?")
+
+        @players = players_q.execute(game_name)
+        view("game", template: 'layout')
+      end
+
+      r.post "submit" do
+        q = @@db.prepare("insert into brackets(game, player, bracket) values (?, ?, ?)")
+        q.execute(game_name, r.params['name'], r.params['bracket'])
+        r.redirect "/games/#{game_name}/view"
+      end
     end
 
     r.post "create" do

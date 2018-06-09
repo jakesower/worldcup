@@ -3,10 +3,10 @@
     width: 100%!important;
   }
 
-  .group-config {
+  /* .group-config {
     width: 90vw!important;
     height: 90vh!important;
-  }
+  } */
 }
 
 @font-face {
@@ -123,6 +123,7 @@ nav .group .group-winners {
 }
 
 nav .group .group-winners div {
+  user-select: none;
   padding: 0;
 }
 
@@ -152,6 +153,7 @@ nav h1 {
   text-align: center;
   padding: 2px;
   border-radius: 2px;
+  user-select: none;
 }
 
 nav h1.loser {
@@ -189,12 +191,13 @@ main::before {
   content: "";
 }
 
-div.group-config {
+.group-config {
   position: absolute;
   top: 0; left: 0; bottom: 0; right: 0;
   margin: auto;
-  width: 70vw;
-  height: 50vh;
+  padding: 1vh;
+  max-width: 500px;
+  min-height: 50vh;
 }
 
 div.question-container {
@@ -206,15 +209,15 @@ div.question-container {
   color: #C00;
 }
 
-div.group-config div.question {
+.group-config div.question {
   margin-top: 3vh;
 }
 
-div.group-config h1 {
+.group-config h1 {
   margin: 0;
 }
 
-div.group-config div.question .hint {
+.group-config div.question .hint {
   font-size: 70%;
 }
 
@@ -222,29 +225,26 @@ div.country h1 {
   position: absolute;
   top: 1vh;
   left: 1vh;
-  font-size: 10vh;
+  font-size: 10vmin;
   padding: 1vh 1vw;
   margin: 0;
   background-color: rgba(255, 255, 255, 0.4);
   border-radius: 1vh;
 }
 
-div.country div.rank {
+div.country div.rank-container {
   position: absolute;
-  bottom: 1vh;
-  left: 1vh;
-  font-size: 10vh;
-  padding: 1vh 1vw;
-  margin: 0;
-  height: 10vh;
-  width: 10vh;
-  text-align: center;
-  vertical-align: top;
-  background-color: rgba(255, 255, 255, 0.4);
+  bottom: 2vh;
+  right: 2vw;
+}
+
+div.country div.rank {
+  /* background-color: rgba(255, 255, 255, 0.4); */
+  background-color: rgba(255, 215, 0, 0.7);
   border-radius: 1vh;
-  background-image: url('../images/laurel.svg');
-  background-repeat: repeat;
-  background-size: cover;
+  display: inline-block;
+  text-align: center;
+  width: 1em;
 }
 
 main.flags div.country {
@@ -278,6 +278,7 @@ div.country:hover div.flag::before {
 }
 
 div.inner-country {
+  user-select: none;
   position: absolute;
   top: 0;
   left: 0;
@@ -305,6 +306,7 @@ div.irn::before { background-image: url('../images/flags/irn.svg'); }
 div.isl::before { background-image: url('../images/flags/isl.svg'); }
 div.ita::before { background-image: url('../images/flags/ita.svg'); }
 div.kor::before { background-image: url('../images/flags/kor.svg'); }
+div.ksa::before { background-image: url('../images/flags/ksa.svg'); }
 div.mor::before { background-image: url('../images/flags/mor.svg'); }
 div.ned::before { background-image: url('../images/flags/ned.svg'); }
 div.nzl::before { background-image: url('../images/flags/nzl.svg'); }
@@ -331,7 +333,6 @@ div.mex::before { background-image: url('../images/flags/mex.svg'); }
 div.nga::before { background-image: url('../images/flags/nga.svg'); }
 div.per::before { background-image: url('../images/flags/per.svg'); }
 div.por::before { background-image: url('../images/flags/por.svg'); }
-div.sau::before { background-image: url('../images/flags/sau.svg'); }
 div.srb::before { background-image: url('../images/flags/srb.svg'); }
 div.sui::before { background-image: url('../images/flags/sui.svg'); }
 div.usa::before { background-image: url('../images/flags/usa.svg'); }

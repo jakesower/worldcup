@@ -1,0 +1,18 @@
+<div class="app-wrapper">
+  <div class="group-config">
+    <div class="question-container">
+      <div class="f" style="margin-right: 3vw;">
+        <img src="/images/logo.svg">
+      </div>
+
+      <div class="f" style="flex-grow: 1;">
+        <h1><%= @name %> Players</h1>
+        <ul>
+          <% @players.each_hash do |p| %>
+            <li><%= p['player'] %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

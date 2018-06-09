@@ -108,6 +108,10 @@ export default [
     "abbreviation": "kor"
   },
   {
+    "name": "Saudi Arabia",
+    "abbreviation": "ksa"
+  },
+  {
     "name": "Mexico",
     "abbreviation": "mex"
   },
@@ -158,10 +162,6 @@ export default [
   {
     "name": "Russia",
     "abbreviation": "rus"
-  },
-  {
-    "name": "Saudi Arabia",
-    "abbreviation": "sau"
   },
   {
     "name": "Senegal",
