@@ -2,7 +2,7 @@ require 'roda'
 require 'sqlite3'
 require 'bcrypt'
 
-@@db = SQLite3::Database.open "db.db"
+@@db = SQLite3::Database.open "db/db.db"
 @@db.results_as_hash = true
 
 class App < Roda

@@ -8,5 +8,6 @@ gem "tilt"
 gem "bcrypt"
 
 group :development do
-  gem "capistrano", "~> 3.11", require: false
+  gem "capistrano", "~> 3.6"
+  gem "capistrano-bundler", "~> 1.3"
 end
