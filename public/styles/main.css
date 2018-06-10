@@ -30,10 +30,17 @@ input, button {
   display: block;
 }
 
-.main-wrapper {
-  display: flex;
-  flex-direction: column;
+.main-container {
+  flex: 1 1 auto;
+  /* flex-basis: fill; */
+  /* height: 100%; */
+  /* width: 100%; */
+  content: "";
   position: relative;
+}
+
+.main-wrapper {
+  position: absolute;
   height: 100%;
   width: 100%;
 }
@@ -41,7 +48,9 @@ input, button {
 .app-wrapper {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  align-items: stretch;
+  height: 100vh!important;
+  width: 100vw!important;
   position: relative;
 }
 
@@ -58,12 +67,12 @@ aside h1 {
 }
 
 .nav-wrapper {
-  flex-grow: 0;
-  order: -1;
+  /* flex-grow: 1; */
   overflow-y: auto;
-  width: 100%;
-  position: relative;
+  /* width: 100%; */
+  /* position: relative; */
   padding-bottom: 0.5vh;
+  min-height: 100px;
 }
 
 nav {
@@ -123,6 +132,7 @@ nav .group .group-winners {
 }
 
 nav .group .group-winners div {
+  -moz-user-select: none;
   user-select: none;
   padding: 0;
 }
@@ -153,6 +163,7 @@ nav h1 {
   text-align: center;
   padding: 2px;
   border-radius: 2px;
+  -moz-user-select: none;
   user-select: none;
 }
 
@@ -172,16 +183,18 @@ nav .group .team .rank {
 
 main {
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
-  flex-grow: 1;
-  order: 0;
-  position: relative;
+  align-items: stretch;
   width: 100%;
-  padding-top: 2px;
+  min-height: 1vh;
+  height: 100%;
 }
 
-main::before {
+main > * {
+  flex: 1 0 auto;
+}
+
+/* main::before {
   top: 0;
   bottom: 0;
   left: 0;
@@ -189,7 +202,7 @@ main::before {
   position: absolute;
   z-index: -2;
   content: "";
-}
+} */
 
 .group-config {
   position: absolute;
@@ -230,6 +243,8 @@ div.country h1 {
   margin: 0;
   background-color: rgba(255, 255, 255, 0.4);
   border-radius: 1vh;
+  -moz-user-select: none;
+  user-select: none;
 }
 
 div.country div.rank-container {
@@ -265,7 +280,7 @@ div.flag::before {
   background-size: contain;
   background-position: center center;
   display: block;
-  height: 120%;
+  height: 100%;
   transform: translate(2vh, -2vh);
   content: "";
   z-index: -1;

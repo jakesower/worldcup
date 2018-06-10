@@ -120,31 +120,19 @@ export default class GameBrackets extends Component {
     const setNavViewing = navViewing => this.setState({ navViewing });
 
     return <div className="app-wrapper">
-      <aside style={this.state.messageVisible ? {} : {display: 'none'}}>
-        <span>Select teams in the order you believe they will place in each group. After that, work your way through the knockout rounds!</span>
-        <h1>Scoring for correct picks:</h1>
-        <ul>
-          <li>Winner of Group: 2pts</li>
-          <li>Runner-up of Group: 2pts</li>
-          <li>Round of 16 (Ro16s): 3pts</li>
-          <li>Quarterfinals: 5pts</li>
-          <li>Semifinals: 8pts</li>
-          <li>Third Place: 1pt</li>
-          <li>Champion: 13pts</li>
-        </ul>
-        <button onClick={() => self.setState({ messageVisible: false })}>Got It</button>
-      </aside>
-      <div className="main-wrapper">
-        { main }
-        <div className="nav-wrapper">
-          <BracketNav
-            viewing={viewing}
-            selectedNavViewing={this.state.navViewing}
-            setViewing={setViewing}
-            setNavViewing={setNavViewing}
-            bracket={this.state.bracket}
-            teamGroups={this.groups}
-          />
+      <div className="nav-wrapper">
+        <BracketNav
+          viewing={viewing}
+          selectedNavViewing={this.state.navViewing}
+          setViewing={setViewing}
+          setNavViewing={setNavViewing}
+          bracket={this.state.bracket}
+          teamGroups={this.groups}
+        />
+      </div>
+      <div className="main-container">
+        <div className="main-wrapper">
+          { main }
         </div>
       </div>
     </div>
