@@ -22,6 +22,9 @@ export default () => {
           <li>Most points wins! Good luck!</li>
           <li>Click the "Groups" button in the upper right to begin.</li>
         </ul>
+        <h1>Sharing</h1>
+        <p>Copy the following link to share the game. Anyone with the link will be able to play this game, so check with the group organizer before sending it out!</p>
+        <p>{ `https://worldcup.jakesower.com/games/${window.worldcup.group}` }</p>
       </div>
     </div>
   </div>

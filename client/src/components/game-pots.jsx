@@ -133,7 +133,10 @@ export default class GamePots extends Component {
             <li>You will lose one point for each goal scored against a team you selected.</li>
             <li>Most points wins!</li>
           </ul>
-          Please note that if you try to select a third team, nothing will happen. Unselect one of your already selected teams before trying to select another.
+          <p>Please note that if you try to select a third team, nothing will happen. Unselect one of your already selected teams before trying to select another.</p>
+          <h1>Sharing</h1>
+          <p>Copy the following link to share the game. Anyone with the link will be able to play this game, so check with the group organizer before sending it out!</p>
+          <p>{ `https://worldcup.jakesower.com/games/${window.worldcup.group}` }</p>
         </div>
       </div>
     </div>
@@ -196,7 +199,6 @@ export default class GamePots extends Component {
   componentDidUpdate() {
     if (window.worldcup) {
       window.sessionStorage.setItem(window.worldcup.group, JSON.stringify(this.state));
-      console.log(this.state)
     }
   }
 }
