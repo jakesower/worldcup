@@ -15,7 +15,7 @@ export default class GameBrackets extends Component {
     this.matches = props.matches;
 
     const initState = {
-      navViewing: "Group",
+      navViewing: "Instructions",
       viewing: {
         mode: "instructions",
       },
