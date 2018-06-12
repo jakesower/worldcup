@@ -20,6 +20,7 @@ export default () => {
             </ul>
           </li>
           <li>Most points wins! Good luck!</li>
+          <li>Click the "Groups" button in the upper right to begin.</li>
         </ul>
       </div>
     </div>
