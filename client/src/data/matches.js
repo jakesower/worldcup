@@ -41,10 +41,10 @@ const gr = g => `Runner-up of Group ${g}`;
 const Ro16s = [
   { id: 49, name: 'Ro16 1', home: gw('A'), away: gr('B') },
   { id: 50, name: 'Ro16 2', home: gw('C'), away: gr('D') },
-  { id: 51, name: 'Ro16 3', home: gw('B'), away: gr('A') },
-  { id: 52, name: 'Ro16 4', home: gw('D'), away: gr('C') },
-  { id: 53, name: 'Ro16 5', home: gw('E'), away: gr('F') },
-  { id: 54, name: 'Ro16 6', home: gw('G'), away: gr('H') },
+  { id: 51, name: 'Ro16 3', home: gw('E'), away: gr('F') },
+  { id: 52, name: 'Ro16 4', home: gw('G'), away: gr('H') },
+  { id: 53, name: 'Ro16 5', home: gw('B'), away: gr('A') },
+  { id: 54, name: 'Ro16 6', home: gw('D'), away: gr('C') },
   { id: 55, name: 'Ro16 7', home: gw('F'), away: gr('E') },
   { id: 56, name: 'Ro16 8', home: gw('H'), away: gr('G') },
 ];
