@@ -112,12 +112,12 @@ export default [
     "abbreviation": "ksa"
   },
   {
-    "name": "Mexico",
-    "abbreviation": "mex"
+    "name": "Morocco",
+    "abbreviation": "mar"
   },
   {
-    "name": "Morocco",
-    "abbreviation": "mor"
+    "name": "Mexico",
+    "abbreviation": "mex"
   },
   {
     "name": "Netherlands",

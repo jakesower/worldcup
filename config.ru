@@ -19,7 +19,9 @@ class App < Roda
     end
 
     r.on "games", String do |game_name|
+      game_data = @@db.prepare("select * from games where name = ?").execute(game_name)
       @name = game_name
+      @game = result_to_a(game_data)[0]['type']
 
       r.is do
         r.get do
@@ -44,7 +46,7 @@ class App < Roda
     r.post "create" do
       @error = true
       @name = r.params['name']
-      @admin_password = r.params['admin_password']
+      @type = r.params['type']
 
       q = @@db.prepare("select name from games where name = ?")
       exists = result_to_a(q.execute(r.params['name'])).size > 0
@@ -53,8 +55,8 @@ class App < Roda
         puts result_to_a(q.execute(r.params['name']))
         view("index", template: 'layout')
       else
-        create_q = @@db.prepare("insert into games (name, admin_password) VALUES (?, ?)")
-        create_q.execute(@name, @admin_password)
+        create_q = @@db.prepare("insert into games (name, type) VALUES (?, ?)")
+        create_q.execute(@name, @type)
         r.redirect "/games/#{@name}"
       end
     end

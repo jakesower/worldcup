@@ -1,6 +1,6 @@
 export default {
   "A": ["rus", "ksa", "uru", "egy"],
-  "B": ["por", "esp", "mor", "irn"],
+  "B": ["por", "esp", "mar", "irn"],
   "C": ["fra", "aus", "per", "den"],
   "D": ["arg", "isl", "cro", "nga"],
   "E": ["bra", "sui", "crc", "srb"],

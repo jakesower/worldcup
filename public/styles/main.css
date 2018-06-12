@@ -2,11 +2,6 @@
   main.flags div.country {
     width: 100%!important;
   }
-
-  /* .group-config {
-    width: 90vw!important;
-    height: 90vh!important;
-  } */
 }
 
 @font-face {
@@ -24,10 +19,11 @@ body {
   /* overflow-x: hidden; */
 }
 
-input, button {
+input, button, select {
   font-size: 3vh;
   font-family: Dusha;
   display: block;
+  max-width: 20rem;
 }
 
 .main-container {
@@ -52,18 +48,6 @@ input, button {
   height: 100vh!important;
   width: 100vw!important;
   position: relative;
-}
-
-aside {
-  background-color: gold;
-  opacity: 0.8;
-  font-size: 3vh;
-  padding: 5px;
-  margin: 0;
-}
-
-aside h1 {
-  font-size: 120%;
 }
 
 .nav-wrapper {
@@ -106,7 +90,7 @@ nav h2 {
 }
 
 nav h3 {
-  font-size: 90%;
+  font-size: 80%;
   /* margin-bottom: 0.2em; */
   /* margin-top: 0.5em; */
 }
@@ -157,7 +141,7 @@ nav .team {
 }
 
 nav h1 {
-  font-size: 100%;
+  font-size: 90%;
   margin: 0;
   display: inline-block;
   text-align: center;
@@ -238,7 +222,7 @@ div.country h1 {
   position: absolute;
   top: 1vh;
   left: 1vh;
-  font-size: 10vmin;
+  font-size: 7vmin;
   padding: 1vh 1vw;
   margin: 0;
   background-color: rgba(255, 255, 255, 0.4);
@@ -263,7 +247,7 @@ div.country div.rank {
 }
 
 main.flags div.country {
-  font-size: 10vh;
+  font-size: 7vh;
   position: relative;
   width: 50%;
   overflow: hidden;
@@ -281,7 +265,6 @@ div.flag::before {
   background-position: center center;
   display: block;
   height: 100%;
-  transform: translate(2vh, -2vh);
   content: "";
   z-index: -1;
   opacity: 0.4;
@@ -322,7 +305,7 @@ div.isl::before { background-image: url('../images/flags/isl.svg'); }
 div.ita::before { background-image: url('../images/flags/ita.svg'); }
 div.kor::before { background-image: url('../images/flags/kor.svg'); }
 div.ksa::before { background-image: url('../images/flags/ksa.svg'); }
-div.mor::before { background-image: url('../images/flags/mor.svg'); }
+div.mar::before { background-image: url('../images/flags/mar.svg'); }
 div.ned::before { background-image: url('../images/flags/ned.svg'); }
 div.nzl::before { background-image: url('../images/flags/nzl.svg'); }
 div.pan::before { background-image: url('../images/flags/pan.svg'); }

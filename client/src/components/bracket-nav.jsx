@@ -6,7 +6,7 @@ import { populateBracketSlots } from '../lib/match-functions';
 const points = { 'Group': 2, 'Ro16': 3, 'Quarter': 5, 'Semi': 8, 'Third': 1, 'Final': 13 };
 const phaseSize = { 'Ro16': 8, 'Quarter': 4, 'Semi': 2 };
 
-const stages = ['Group', 'Ro16', 'Quarter', 'Semi', 'Third', 'Final', 'Submit Bracket'];
+const stages = ['Instructions', 'Group', 'Ro16', 'Quarter', 'Semi', 'Third', 'Final', 'Submit Bracket'];
 const pluralStages = ['Group', 'Quarter', 'Semi'];
 
 export default ({ viewing, setViewing, selectedNavViewing, setNavViewing, bracket, teamGroups }) => {
@@ -17,6 +17,7 @@ export default ({ viewing, setViewing, selectedNavViewing, setNavViewing, bracke
     const d = (stage === 'Group') ? { mode: 'group', group: 'A' }
             : (stage === 'Third') ? { mode: 'match', matchName: 'Match for Third Place' }
             : (stage === 'Final') ? { mode: 'match', matchName: 'Final' }
+            : (stage === 'Instructions') ? { mode: 'instructions' }
             : (stage === 'Submit Bracket') ? { mode: 'submit', matchName: 'Final' }
                                   : { mode: 'match', matchName: `${stage} 1` };
     setViewing(d);
@@ -125,7 +126,6 @@ export default ({ viewing, setViewing, selectedNavViewing, setNavViewing, bracke
   // }
 
   function knockoutMatch(match, isSelected, idx) {
-    console.log(bracketSlots)
     const unk = x => x === 'unknown' ? '???' : x;
     const winner = bracket.knockout[match.name];
     const homeState = (winner === 'home') ? ' winner' : (winner === 'away' ? ' loser' : '');

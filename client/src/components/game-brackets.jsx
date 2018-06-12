@@ -6,6 +6,7 @@ import ViewMatch from '../components/view-match';
 import Submit from './submit';
 import BracketNav from '../components/bracket-nav';
 import { populateBracketSlots } from '../lib/match-functions';
+import Instructions from './instructions';
 
 export default class GameBrackets extends Component {
   constructor(props) {
@@ -16,8 +17,7 @@ export default class GameBrackets extends Component {
     const initState = {
       navViewing: "Group",
       viewing: {
-        mode: "group",
-        group: "A",
+        mode: "instructions",
       },
       messageVisible: false,
       bracket: {
@@ -92,8 +92,6 @@ export default class GameBrackets extends Component {
 
 
   viewSubmit() {
-    // const bracket = populateBracketSlots(this.state.bracket, this.groups);
-
     return <Submit
       bracket={this.state.bracket}
       teamGroups={this.groups}
@@ -111,6 +109,8 @@ export default class GameBrackets extends Component {
         return this.viewGroup();
       } else if (mode === 'match') {
         return this.viewMatch();
+      } else if (mode === 'instructions') {
+        return <Instructions />
       } else {
         return this.viewSubmit();
       }

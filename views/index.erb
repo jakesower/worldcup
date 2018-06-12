@@ -22,9 +22,19 @@
           </div>
 
           <div class="question">
-            <label>Admin Password</label>
-            <input name="admin_password" type="text" required value="<%= @admin_password %>">
-            <div class="hint">Use this to close brackets and other stuff.</div>
+            <label>Game Type</label>
+            <select name="type" value="<%= @type %>" required>
+              <option value=""></option>
+              <option value="brackets">Brackets</option>
+              <option value="goal_pools">Goal Pools</option>
+            </select>
+            <div class="hint">
+              The type of game for this group.
+              <ul>
+                <li><b>Brackets:</b> Try to guess the winners of groups, then the winners of each knockout game.</li>
+                <li><b>Group Pool:</b> Pick teams from the four pots used to create the groups in the tournament. Get points for goals scored. Lose points for goals against.</li>
+              </ul>
+            </div>
           </div>
 
           <div class="question">

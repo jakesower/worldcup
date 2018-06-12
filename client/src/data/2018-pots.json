@@ -1,0 +1,6 @@
+{
+  "A": ["arg", "bel", "bra", "fra", "ger", "pol", "por", "rus"],
+  "B": ["col", "cro", "eng", "esp", "mex", "per", "sui", "uru"],
+  "C": ["crc", "den", "egy", "irn", "isl", "sen", "swe", "tun"],
+  "D": ["aus", "jpn", "kor", "ksa", "mar", "nga", "pan", "srb"]
+}
