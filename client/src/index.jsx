@@ -4,7 +4,9 @@ import { render } from 'react-dom';
 
 import GameBrackets from './components/game-brackets';
 import GamePools from './components/game-pots';
+import ViewBrackets from './components/view-brackets';
 import { draws, matches, teams } from './data';
+import { populateBracketSlots } from './lib/match-functions';
 import pots from './data/2018-pots.json'
 
 const tournamentDraws = draws['2018'];
@@ -15,13 +17,23 @@ const tournamentGroups = map(
 const tournamentPools = map(
   draw => chain(d => teams[d], draw),
   pots
-)
-
-
-render(
-  (window.worldcup.game === 'brackets' ? brackets() : potGame()),
-  document.getElementById("app")
 );
+
+const config = window.worldcup;
+
+const hydratedPlayers = config.players.map((p, i) => ({
+  id: i,
+  player: p.player,
+  bracket: populateBracketSlots(JSON.parse(p.bracket), tournamentGroups),
+  score: 0,
+}));
+
+const base = false ?
+  (window.worldcup.game === 'brackets' ? brackets() : potGame()) :
+  (window.worldcup.game === 'brackets' ? viewBrackets() : viewPot());
+
+
+render(base, document.getElementById("app"));
 
 
 function brackets() {
@@ -37,4 +49,12 @@ function potGame() {
     pots={tournamentPools}
   >
   </GamePools>
+}
+
+
+function viewBrackets() {
+  return <ViewBrackets
+    group={config.group}
+    players={hydratedPlayers}
+  />
 }

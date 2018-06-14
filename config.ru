@@ -1,6 +1,7 @@
 require 'roda'
 require 'sqlite3'
 require 'bcrypt'
+require 'json'
 
 @@db = SQLite3::Database.open "db/db.db"
 @@db.results_as_hash = true
@@ -14,36 +15,36 @@ class App < Roda
   end
 
   route do |r|
-    view('closed', template: 'layout')
+    # view('view', template: 'layout')
 
     # r.root do
     #   view("index", template: 'layout')
     # end
 
-    # r.on "games", String do |game_name|
-    #   game_data = @@db.prepare("select * from games where name = ?").execute(game_name)
-    #   @name = game_name
-    #   @game = result_to_a(game_data)[0]['type']
+    r.on "games", String do |game_name|
+      game_data = @@db.prepare("select * from games where name = ?").execute(game_name)
+      @name = game_name
+      @game = result_to_a(game_data)[0]['type']
 
-    #   r.is do
-    #     r.get do
-    #       view("brackets", template: 'layout')
-    #     end
-    #   end
+      r.is do
+        r.get do
+          players_q = @@db.prepare("select player, bracket from brackets where game = ?")
 
-    #   r.get "view" do
-    #     players_q = @@db.prepare("select player from brackets where game = ?")
+          @players = players_q.execute(game_name).map{|x| x}
+          view("view", template: 'layout')
+        end
+      end
 
-    #     @players = players_q.execute(game_name)
-    #     view("game", template: 'layout')
-    #   end
+      r.get "view" do
+        r.redirect "/games/#{game_name}"
+      end
 
-    #   r.post "submit" do
-    #     q = @@db.prepare("insert into brackets(game, player, bracket) values (?, ?, ?)")
-    #     q.execute(game_name, r.params['name'], r.params['bracket'])
-    #     r.redirect "/games/#{game_name}/view"
-    #   end
-    # end
+      # r.post "submit" do
+      #   q = @@db.prepare("insert into brackets(game, player, bracket) values (?, ?, ?)")
+      #   q.execute(game_name, r.params['name'], r.params['bracket'])
+      #   r.redirect "/games/#{game_name}/view"
+      # end
+    end
 
     # r.post "create" do
     #   @error = true

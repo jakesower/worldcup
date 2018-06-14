@@ -38,9 +38,11 @@ export function populateBracketSlots(bracketState, teamGroups) {
 
   const groupRanks = pipeThru(teamGroups, [
     mapObjIndexed(
-      (teams, group) => ({
+      (_, group) => ({
         [`Winner of Group ${group}`]: rankedInGroup(1, group),
         [`Runner-up of Group ${group}`]: rankedInGroup(2, group),
+        [`${group}1`]: rankedInGroup(1, group),
+        [`${group}2`]: rankedInGroup(2, group),
       })
     ),
     Object.values,

@@ -1,0 +1,9 @@
+<script type="text/javascript">
+  window.worldcup = {
+    group: "<%= @name %>",
+    game: "<%= @game %>",
+    players: <%= @players.to_json %>
+  }
+</script>
+<div id="app"></div>
+<script src="/js/worldcup.js"></script>

@@ -1,0 +1,119 @@
+@font-face {
+  font-family: "Dusha";
+  src: url("../fonts/dusha.woff2");
+}
+
+html {
+  font-size: 18px;
+}
+
+body {
+  font-family: Dusha;
+  background: url('../images/bg.jpg') no-repeat center center fixed;
+  background-size: cover;
+  color: #171714;
+}
+
+h1 {
+  background-image: url('../images/blue-bg.png');
+  display: block;
+  color: #F5EED5;
+  text-transform: capitalize;
+  font-size: 200%;
+  padding: 1em 0.3em;
+  margin-top: -1px;
+}
+
+nav {
+  background-image: url('../images/blue-bg.png');
+  color: #F5EED5;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin-top: -1px;
+}
+
+nav h2 {
+  font-size: 130%;
+  padding: 0.4em;
+  cursor: pointer;
+}
+
+nav h2.selected {
+  background-image: url('../images/bg.jpg');
+  color: #171714;
+}
+
+main {
+  padding: 1em;
+  font-size: 140%;
+}
+
+main h2 {
+  font-weight: bold;
+  margin: 0.5em 0 0.3em 0;
+}
+
+main ol {
+  list-style-type: decimal;
+  list-style-position: inside;
+  margin-left: 1em;
+}
+
+table thead th {
+  background-color: #E5C685;
+  color: #D30208;
+  padding: 0.2em 1em;
+  text-align: left;
+  border: 1px solid #171714;
+}
+
+table tbody td {
+  padding: 0.2em 1em;
+}
+
+table .numeric {
+  text-align: right;
+}
+
+.bracket-stages {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.bracket-stages > * {
+  flex: 1;
+  min-width: 15em;
+}
+
+.stage {
+  border: solid thick #171714;
+  position: relative;
+  margin: 0 0.5em 1em 0.5em;
+}
+
+.stage .inner {
+  padding: 0.5em;
+}
+
+.stage h1 {
+  font-size: 120%;
+  padding: 0.5em;
+}
+
+.stage .match {
+  border-left: solid medium #171714;
+  padding: 0 0.3em;
+}
+
+.stage .match > * {
+  padding: 0.2em;
+}
+
+.stage .match span {
+  padding: 0.2em;
+}
+
+.match .winner {
+  background-color: #E5C685;
+}
