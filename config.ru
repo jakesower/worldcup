@@ -14,52 +14,54 @@ class App < Roda
   end
 
   route do |r|
-    r.root do
-      view("index", template: 'layout')
-    end
+    view('closed', template: 'layout')
 
-    r.on "games", String do |game_name|
-      game_data = @@db.prepare("select * from games where name = ?").execute(game_name)
-      @name = game_name
-      @game = result_to_a(game_data)[0]['type']
+    # r.root do
+    #   view("index", template: 'layout')
+    # end
 
-      r.is do
-        r.get do
-          view("brackets", template: 'layout')
-        end
-      end
+    # r.on "games", String do |game_name|
+    #   game_data = @@db.prepare("select * from games where name = ?").execute(game_name)
+    #   @name = game_name
+    #   @game = result_to_a(game_data)[0]['type']
 
-      r.get "view" do
-        players_q = @@db.prepare("select player from brackets where game = ?")
+    #   r.is do
+    #     r.get do
+    #       view("brackets", template: 'layout')
+    #     end
+    #   end
 
-        @players = players_q.execute(game_name)
-        view("game", template: 'layout')
-      end
+    #   r.get "view" do
+    #     players_q = @@db.prepare("select player from brackets where game = ?")
 
-      r.post "submit" do
-        q = @@db.prepare("insert into brackets(game, player, bracket) values (?, ?, ?)")
-        q.execute(game_name, r.params['name'], r.params['bracket'])
-        r.redirect "/games/#{game_name}/view"
-      end
-    end
+    #     @players = players_q.execute(game_name)
+    #     view("game", template: 'layout')
+    #   end
 
-    r.post "create" do
-      @error = true
-      @name = r.params['name']
-      @type = r.params['type']
+    #   r.post "submit" do
+    #     q = @@db.prepare("insert into brackets(game, player, bracket) values (?, ?, ?)")
+    #     q.execute(game_name, r.params['name'], r.params['bracket'])
+    #     r.redirect "/games/#{game_name}/view"
+    #   end
+    # end
 
-      q = @@db.prepare("select name from games where name = ?")
-      exists = result_to_a(q.execute(r.params['name'])).size > 0
+    # r.post "create" do
+    #   @error = true
+    #   @name = r.params['name']
+    #   @type = r.params['type']
 
-      if exists
-        puts result_to_a(q.execute(r.params['name']))
-        view("index", template: 'layout')
-      else
-        create_q = @@db.prepare("insert into games (name, type) VALUES (?, ?)")
-        create_q.execute(@name, @type)
-        r.redirect "/games/#{@name}"
-      end
-    end
+    #   q = @@db.prepare("select name from games where name = ?")
+    #   exists = result_to_a(q.execute(r.params['name'])).size > 0
+
+    #   if exists
+    #     puts result_to_a(q.execute(r.params['name']))
+    #     view("index", template: 'layout')
+    #   else
+    #     create_q = @@db.prepare("insert into games (name, type) VALUES (?, ?)")
+    #     create_q.execute(@name, @type)
+    #     r.redirect "/games/#{@name}"
+    #   end
+    # end
   end
 end
 
