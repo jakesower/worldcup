@@ -30,7 +30,7 @@ nav {
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
-  margin-top: -1px;
+  margin-top: -2px;
 }
 
 nav h2 {
