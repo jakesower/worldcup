@@ -121,3 +121,8 @@ table .numeric {
 ul.pot-list li {
   text-transform: uppercase;
 }
+
+.note {
+  color: #D30208;
+  margin-bottom: 0.5em;
+}
