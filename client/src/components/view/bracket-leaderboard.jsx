@@ -4,8 +4,6 @@ import { ascend, descend, prop, sortWith } from 'ramda';
 export default ({ players }) => {
   const byPlayer = ascend(prop('player'));
   const byScore = descend(prop('score'));
-  console.log(players);
-  console.log(players[0].bracket)
 
   return <table>
     <thead>

@@ -6,8 +6,8 @@ import GameBrackets from './components/game-brackets';
 import GamePools from './components/game-pots';
 import ViewBrackets from './components/view-brackets';
 import { draws, matches, teams } from './data';
-import { populateBracketSlots } from './lib/match-functions';
 import pots from './data/2018-pots.json'
+import ViewPots from './components/view-pots';
 
 const tournamentDraws = draws['2018'];
 const tournamentGroups = map(
@@ -20,17 +20,14 @@ const tournamentPools = map(
 );
 
 const config = window.worldcup;
-
-const hydratedPlayers = config.players.map((p, i) => ({
-  id: i,
-  player: p.player,
-  bracket: populateBracketSlots(JSON.parse(p.bracket), tournamentGroups),
-  score: 0,
-}));
+const matchResults = [
+  { id: 1, homeTeam: 'rus', awayTeam: 'ksa', homeScore: 5, awayScore: 0 }
+];
 
 const base = false ?
   (window.worldcup.game === 'brackets' ? brackets() : potGame()) :
-  (window.worldcup.game === 'brackets' ? viewBrackets() : viewPot());
+  (window.worldcup.game === 'brackets' ? viewBrackets() : viewPots());
+
 
 
 render(base, document.getElementById("app"));
@@ -55,6 +52,16 @@ function potGame() {
 function viewBrackets() {
   return <ViewBrackets
     group={config.group}
-    players={hydratedPlayers}
+    players={config.players}
+    tournamentGroups={tournamentGroups}
+  />
+}
+
+function viewPots() {
+  return <ViewPots
+    group={config.group}
+    players={config.players}
+    tournamentPools={tournamentPools}
+    matchResults={matchResults}
   />
 }

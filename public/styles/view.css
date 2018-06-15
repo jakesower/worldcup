@@ -117,3 +117,7 @@ table .numeric {
 .match .winner {
   background-color: #E5C685;
 }
+
+ul.pot-list li {
+  text-transform: uppercase;
+}
