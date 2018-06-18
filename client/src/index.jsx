@@ -33,6 +33,7 @@ const matchResults = [
   { id: 10, homeTeam: 'bra', awayTeam: 'sui', homeScore: 1, awayScore: 1 },
   { id: 11, homeTeam: 'ger', awayTeam: 'mex', homeScore: 0, awayScore: 1 },
   { id: 12, homeTeam: 'swe', awayTeam: 'kor', homeScore: 1, awayScore: 0 },
+  { id: 13, homeTeam: 'bel', awayTeam: 'pan', homeScore: 3, awayScore: 0 },
 ];
 
 const base = false ?
