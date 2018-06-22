@@ -3,6 +3,8 @@ import { ascend, lensPath, prop, set, sort } from 'ramda';
 import { populateBracketSlots } from '../lib/match-functions';
 import Leaderboard from './view/bracket-leaderboard';
 import Player from './view/bracket-player';
+import { groupPoints } from '../lib/bracket-functions';
+import { goalDifference } from '../lib/group-functions';
 
 const byPlayer = ascend(prop('player'));
 
@@ -16,6 +18,11 @@ export default class ViewBrackets extends Component {
       score: 0,
     }));
     this.group = props.group;
+    this.matchResults = props.matchResults;
+
+    // console.log(props);
+    // console.log(groupPoints(this.matchResults, 'arg'));
+    // console.log(goalDifference(this.matchResults, 'arg'));
 
     this.state = {
       view: {
