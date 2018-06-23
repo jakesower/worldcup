@@ -4,7 +4,7 @@ import { populateBracketSlots } from '../lib/match-functions';
 import Leaderboard from './view/bracket-leaderboard';
 import Player from './view/bracket-player';
 import { groupPoints } from '../lib/bracket-functions';
-import { goalDifference } from '../lib/group-functions';
+import { goalDifference, possibleTeamsForSlot } from '../lib/group-functions';
 
 const byPlayer = ascend(prop('player'));
 
@@ -19,6 +19,11 @@ export default class ViewBrackets extends Component {
     }));
     this.group = props.group;
     this.matchResults = props.matchResults;
+
+    console.log(Object.keys(props.tournamentGroups).map(group => ({ group, m: possibleTeamsForSlot(this.matchResults, props.tournamentGroups[group]) })))
+    // const groupA = props.tournamentGroups['C'].map(x => x.abbreviation);
+    // console.log(possibleTeamsForSlot(props.matchResults, groupA))
+    // console.log({ props, groupA })
 
     // console.log(props);
     // console.log(groupPoints(this.matchResults, 'arg'));

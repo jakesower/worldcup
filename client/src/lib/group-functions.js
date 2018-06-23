@@ -1,4 +1,4 @@
-import { flatten, merge, sortBy, union, xprod } from 'ramda';
+import { flatten, merge, prop, range, sortBy, union, xprod } from 'ramda';
 import { countTrue } from './utils';
 
 // Given the results of a group, what's the outcome.
@@ -6,12 +6,17 @@ export function points(matches, team) {
   const win = (t, m) => (t === m.homeTeam && m.homeScore > m.awayScore) || (t === m.awayTeam && m.awayScore > m.homeScore);
   const tie = (t, m) => (t === m.homeTeam || t === m.awayTeam) && (m.homeScore === m.awayScore);
 
-  return groupMatches.reduce(
+  return matches.reduce(
     (pts, match) =>
       win(team, match) ? (pts+3) :
       tie(team, match) ? (pts+1) : pts,
     0
   );
+}
+
+
+export function matchesWithTeams(matches, teams) {
+  return matches.filter(m => teams.includes(m.homeTeam) || teams.includes(m.awayTeam));
 }
 
 
@@ -33,12 +38,6 @@ export function gamesPlayed(matches, team) {
 }
 
 
-// this is for completed groups
-export function groupResult(matches) {
-
-}
-
-
 export function pairings(teams) {
   return xprod(teams, teams).filter(([t1, t2]) => t1 < t2);
 }
@@ -55,9 +54,11 @@ export function homeSortedMatches(matches) {
 // assume 3 games will be played by each team
 // since this is about potential, points are the only thing that matter--all tie breakers are assumed to go either way
 export function possibleTeamsForSlot(matches, teams, slot) {
+  console.log({ matches, teams })
   const toPlay = pairings(teams);
+  const played = matchesWithTeams(matches, teams);
   const unplayed = toPlay.filter(([t1, t2]) =>
-    !matches.some(m => (m.homeTeam === t1 && m.awayTeam === t2) || (m.homeTeam === t2 && m.awayTeam === t1))
+    !played.some(m => (m.homeTeam === t1 && m.awayTeam === t2) || (m.homeTeam === t2 && m.awayTeam === t1))
   );
 
   const potentials = unplayed.map(([t1, t2]) => [
@@ -69,12 +70,12 @@ export function possibleTeamsForSlot(matches, teams, slot) {
   // creates a list of all possible match outcomes, given the current match results
   const allPotentials = potentials.reduce((acc, pot) =>
     xprod(acc, pot).map(flatten),
-    [matches]
+    [played]
   );
 
-  const toOutcome = (matches, teams) => {
+  const toOutcome = ms => {
     const pairs = teams.map(team => {
-      const score = points(matches, team);
+      const score = points(ms, team);
       return { score, team };
     });
 
@@ -84,33 +85,17 @@ export function possibleTeamsForSlot(matches, teams, slot) {
   // list of outcomes -> list of finishing slots
   const places = (outcome, targetTeam) => {
     const targetScore = outcome.find(({ team }) => targetTeam === team).score;
-    return range(1, 4).filter(i => outcome[i-1].score === targetScore);
+    return range(1, 5).filter(i => outcome[i-1].score === targetScore);
   }
 
-  const results = allPotentials.reduce((teamPairs, matchSet) => {
-    const outcome = points(matches);
-    return teamPairs.map(([team, slots]) => {
+  return allPotentials.reduce(
+    (teamPairs, matchSet) => {
+      const outcome = toOutcome(matchSet);
+      return teamPairs.map(({ team, slots }) => {
+        return { team, slots: union(slots, places(outcome, team)) };
+      });
+    },
+    teams.map(team => ({ team, slots: [] }))
+  );
 
-    })
-  });
-
-  if (teams.all(t => gamesPlayed(matches, t) === 3)) {
-    return groupResult(matches);
-  }
-
-  const pointRanges = teams.map(team => {
-    const currentPoints = points(matches, team);
-    const remaining = (3 - gamesPlayed(matches, team));
-    const best = currentPoints + (remaining * 3); // all wins
-    const worst = currentPoints;
-
-    return { best, worst, team };
-  });
-
-  const positionRanges = pointRanges.map(({ best, worst, team }) => {
-    const bestPosition = 5 - countTrue(other => other.worst <= best, teams);
-    const worstPosition = countTrue(other => other.best <= worst);
-
-    return { best: bestPosition, worst: worstPosition, team };
-  })
 }
