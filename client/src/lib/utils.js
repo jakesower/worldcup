@@ -11,3 +11,15 @@ export function objOfKeys(ary, val) {
   }
   return out;
 }
+
+export function countTrue(predicateFn, ary) {
+  return ary.reduce((acc, elt) => {
+    predicateFn(elt) ? (acc+1) : acc,
+    0
+  });
+}
+
+
+export function union (set1, set2) {
+  return new Set([...set1, ...set2]);
+}

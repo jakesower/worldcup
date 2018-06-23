@@ -11,8 +11,8 @@ export default ({ players }) => {
         <th>Name</th>
         <th>Predicted Winner</th>
         <th>Min Score</th>
-        {/* <th></th> */}
-        {/* <th>Max Score</th> */}
+        <th></th>
+        <th>Max Score</th>
       </tr>
     </thead>
     <tbody>
@@ -21,8 +21,8 @@ export default ({ players }) => {
           <td>{player.player}</td>
           <td>{player.bracket['Winner of Final'].name}</td>
           <td className="numeric">0</td>
-          {/* <td></td> */}
-          {/* <td className="numeric">106</td> */}
+          <td></td>
+          <td className="numeric">106</td>
         </tr>
       )}
     </tbody>
