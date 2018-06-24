@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { ascend, map, prop, sort, values } from 'ramda';
+import { ascend, map, prop, sort } from 'ramda';
 import { populateBracketSlots } from '../lib/match-functions';
 import Leaderboard from './view/bracket-leaderboard';
 import Player from './view/bracket-player';
-import { groupPoints, possibleTeamsForSlot, bracketToSlots, maxScore, minScore } from '../lib/bracket-functions';
-import { goalDifference, possibleTeamSlots } from '../lib/group-functions';
+import { possibleTeamsForSlot, bracketToSlots, maxScore, minScore } from '../lib/bracket-functions';
 
 /**
  * Each player's brackets can be represented as a range of possible scores.
@@ -51,21 +50,9 @@ export default class ViewBrackets extends Component {
     this.group = props.group;
     this.slots = props.slots;
 
-    // console.log(this);
-    // console.log(possibleTeamsForSlot(this.slots, this.matchResults, this.teamsByGroup, 'Final'))
-    // console.log(bracketToSlots(this.players[0].bracket))
-    // console.log(maxScore(this.slots, this.matchResults, this.teamsByGroup, bracketToSlots(this.players[0].bracket)))
-
-    // this.state = {
-    //   view: {
-    //     mode: "leaderboard",
-    //   }
-    // }
-
     this.state = {
       view: {
-        mode: "player",
-        activePlayer: 1
+        mode: "leaderboard",
       }
     }
   }
