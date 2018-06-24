@@ -12,7 +12,7 @@ export default ({ slots, bracket, slotResults }) => {
     const right = res.length === 1 && res.includes(team.abbreviation);
     const wrong = !res.includes(team.abbreviation);
     const c = right ? "right" : (wrong ? "wrong" : "");
-    const pointsMarkup = right ? `+${slot.points} pts` : (wrong ? `-${slot.points} pts` : '');
+    const pointsMarkup = right ? `+${slot.points}` : (wrong ? `✘` : '');
 
     return <span className={c}><span className="team-name">{ team.name }</span> <span className="points">{ pointsMarkup }</span></span>
   }
@@ -38,7 +38,7 @@ export default ({ slots, bracket, slotResults }) => {
 
   return <div className="bracket-stages">
     <div className="stage">
-      <h1>Group Stage</h1>
+      <h1>Group Stage (2 pts)</h1>
       <div className="inner">
         {groups.map(g => {
           return <Fragment key={g}>
@@ -53,7 +53,7 @@ export default ({ slots, bracket, slotResults }) => {
     </div>
 
     <div className="stage">
-      <h1>Round of 16</h1>
+      <h1>Round of 16 (3 pts)</h1>
       { koMatch('Ro16 1', 'Ro16-1') }
       { koMatch('Ro16 2', 'Ro16-2') }
       { koMatch('Ro16 3', 'Ro16-3') }
@@ -65,7 +65,7 @@ export default ({ slots, bracket, slotResults }) => {
     </div>
 
     <div className="stage">
-      <h1>Quarterfinals</h1>
+      <h1>Quarterfinals (5 pts)</h1>
       { koMatch('Quarter 1', 'QF-1') }
       { koMatch('Quarter 2', 'QF-2') }
       { koMatch('Quarter 3', 'QF-3') }

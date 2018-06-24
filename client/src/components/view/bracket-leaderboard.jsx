@@ -6,13 +6,12 @@ export default ({ players }) => {
   const byMinScore = descend(prop('minScore'));
   const byMaxScore = descend(prop('maxScore'));
 
-  return <table>
+  return <table className="leaderboard">
     <thead>
       <tr>
         <th>Name</th>
         <th>Predicted Winner</th>
         <th>Min Score</th>
-        {/* <th></th> */}
         <th>Max Score</th>
       </tr>
     </thead>
@@ -22,7 +21,6 @@ export default ({ players }) => {
           <td>{player.player}</td>
           <td>{player.bracket['Winner of Final'].name}</td>
           <td className="numeric">{player.minScore}</td>
-          {/* <td></td> */}
           <td className="numeric">{player.maxScore}</td>
         </tr>
       )}

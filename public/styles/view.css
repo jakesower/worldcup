@@ -130,12 +130,12 @@ table .numeric {
   text-decoration: line-through;
 }
 
-.right .points {
-  color: #05D305;
+.right {
+  font-weight: bold;
 }
 
-.right .team-name {
-  font-weight: bold;
+.right .points {
+  color: #05B305;
 }
 
 ul.pot-list li {
@@ -145,4 +145,18 @@ ul.pot-list li {
 .note {
   color: #D30208;
   margin-bottom: 0.5em;
+}
+
+.leaderboard th, .leaderboard td {
+  white-space: nowrap;
+}
+
+svg.score-range {
+  width: 100%;
+  height: 4px;
+}
+
+svg rect.track-fill {
+  color: #D30208;
+  width: 100%;
 }
