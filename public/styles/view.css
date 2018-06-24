@@ -110,12 +110,32 @@ table .numeric {
   padding: 0.2em;
 }
 
-.stage .match span {
+.stage .match > div > span {
   padding: 0.2em;
 }
 
 .match .winner {
   background-color: #E5C685;
+}
+
+.match .loser {
+  opacity: 0.6;
+}
+
+.wrong .points {
+  color: #D30208;
+}
+
+.wrong .team-name {
+  text-decoration: line-through;
+}
+
+.right .points {
+  color: #05D305;
+}
+
+.right .team-name {
+  font-weight: bold;
 }
 
 ul.pot-list li {

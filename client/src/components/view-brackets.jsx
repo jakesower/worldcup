@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ascend, map, lensPath, prop, set, sort } from 'ramda';
+import { ascend, map, prop, sort, values } from 'ramda';
 import { populateBracketSlots } from '../lib/match-functions';
 import Leaderboard from './view/bracket-leaderboard';
 import Player from './view/bracket-player';
@@ -37,7 +37,10 @@ const zomg = (bracket, tournamentGroups) => {
 export default class ViewBrackets extends Component {
   constructor(props) {
     super(props);
+
     const teamsByGroup = map(map(prop('abbreviation')))(props.tournamentGroups);
+    this.slotResults = map(s => possibleTeamsForSlot(props.slots, props.matchResults, teamsByGroup, s.id))(props.slots);
+
     this.players = props.players.map((p, i) => ({
       id: i,
       player: p.player,
@@ -46,7 +49,6 @@ export default class ViewBrackets extends Component {
       maxScore: maxScore(props.slots, props.matchResults, teamsByGroup, zomg(p.bracket, props.tournamentGroups)),
     }));
     this.group = props.group;
-    this.matchResults = props.matchResults;
     this.slots = props.slots;
 
     // console.log(this);
@@ -54,9 +56,16 @@ export default class ViewBrackets extends Component {
     // console.log(bracketToSlots(this.players[0].bracket))
     // console.log(maxScore(this.slots, this.matchResults, this.teamsByGroup, bracketToSlots(this.players[0].bracket)))
 
+    // this.state = {
+    //   view: {
+    //     mode: "leaderboard",
+    //   }
+    // }
+
     this.state = {
       view: {
-        mode: "leaderboard",
+        mode: "player",
+        activePlayer: 1
       }
     }
   }
@@ -98,8 +107,7 @@ export default class ViewBrackets extends Component {
 
 
   viewPlayer() {
-    console.log({p: this.players, s: this.state})
     const p = this.players.find(p => p.id === this.state.view.activePlayer);
-    return <Player player={ p.player } bracket={ p.bracket } />;
+    return <Player slots={ this.slots } slotResults={ this.slotResults } bracket={ p.bracket } />;
   }
 }
