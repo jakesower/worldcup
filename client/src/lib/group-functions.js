@@ -53,8 +53,8 @@ export function homeSortedMatches(matches) {
 
 // assume 3 games will be played by each team
 // since this is about potential, points are the only thing that matter--all tie breakers are assumed to go either way
-export function possibleTeamsForSlot(matches, teams, slot) {
-  console.log({ matches, teams })
+// NOTE: this is an approximate function--impossible scenarios might slip through, though no one will likely notice
+export function possibleTeamPositions(matches, teams) {
   const toPlay = pairings(teams);
   const played = matchesWithTeams(matches, teams);
   const unplayed = toPlay.filter(([t1, t2]) =>
@@ -82,7 +82,7 @@ export function possibleTeamsForSlot(matches, teams, slot) {
     return sortBy(prop('score'), pairs).reverse();
   }
 
-  // list of outcomes -> list of finishing slots
+  // list of outcomes -> list of finishing positions
   const places = (outcome, targetTeam) => {
     const targetScore = outcome.find(({ team }) => targetTeam === team).score;
     return range(1, 5).filter(i => outcome[i-1].score === targetScore);
@@ -91,11 +91,11 @@ export function possibleTeamsForSlot(matches, teams, slot) {
   return allPotentials.reduce(
     (teamPairs, matchSet) => {
       const outcome = toOutcome(matchSet);
-      return teamPairs.map(({ team, slots }) => {
-        return { team, slots: union(slots, places(outcome, team)) };
+      return teamPairs.map(({ team, positions }) => {
+        return { team, positions: union(positions, places(outcome, team)) };
       });
     },
-    teams.map(team => ({ team, slots: [] }))
+    teams.map(team => ({ team, positions: [] }))
   );
 
 }

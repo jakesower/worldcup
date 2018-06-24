@@ -5,7 +5,7 @@ import { ascend, descend, prop, sortWith } from 'ramda';
 const groups = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
 
 
-export default ({ player, bracket }) => {
+export default ({ bracket }) => {
   function koMatch(matchName) {
     const match = matches.find(m => m.name === matchName);
     const home = bracket[match.home].name;

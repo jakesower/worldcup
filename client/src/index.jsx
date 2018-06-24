@@ -3,6 +3,7 @@ import { chain, map } from 'ramda';
 import { render } from 'react-dom';
 
 import { draws, matches, teams } from './data';
+import slots from './data/slots';
 import pots from './data/2018-pots.json'
 import matchResults from './data/2018-results.json';
 
@@ -51,6 +52,7 @@ function viewBrackets() {
   return <ViewBrackets
     group={config.group}
     players={config.players}
+    slots={slots}
     tournamentGroups={tournamentGroups}
     matchResults={matchResults}
   />

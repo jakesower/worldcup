@@ -3,7 +3,8 @@ import { ascend, descend, prop, sortWith } from 'ramda';
 
 export default ({ players }) => {
   const byPlayer = ascend(prop('player'));
-  const byScore = descend(prop('score'));
+  const byMinScore = descend(prop('minScore'));
+  const byMaxScore = descend(prop('maxScore'));
 
   return <table>
     <thead>
@@ -16,13 +17,13 @@ export default ({ players }) => {
       </tr>
     </thead>
     <tbody>
-      {sortWith([byScore, byPlayer], players).map(player =>
+      {sortWith([byMinScore, byMaxScore, byPlayer], players).map(player =>
         <tr key={player.player}>
           <td>{player.player}</td>
           <td>{player.bracket['Winner of Final'].name}</td>
-          <td className="numeric">0</td>
+          <td className="numeric">{player.minScore}</td>
           <td></td>
-          <td className="numeric">106</td>
+          <td className="numeric">{player.maxScore}</td>
         </tr>
       )}
     </tbody>
