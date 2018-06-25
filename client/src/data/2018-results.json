@@ -32,5 +32,7 @@
   { "id": 31, "homeTeam": "jpn", "awayTeam": "sen", "homeScore": 2, "awayScore": 2, "stage": "group" },
   { "id": 32, "homeTeam": "pol", "awayTeam": "col", "homeScore": 0, "awayScore": 3, "stage": "group" },
   { "id": 33, "homeTeam": "uru", "awayTeam": "rus", "homeScore": 3, "awayScore": 0, "stage": "group" },
-  { "id": 34, "homeTeam": "ksa", "awayTeam": "egy", "homeScore": 2, "awayScore": 1, "stage": "group" }
+  { "id": 34, "homeTeam": "ksa", "awayTeam": "egy", "homeScore": 2, "awayScore": 1, "stage": "group" },
+  { "id": 35, "homeTeam": "irn", "awayTeam": "por", "homeScore": 1, "awayScore": 1, "stage": "group" },
+  { "id": 36, "homeTeam": "esp", "awayTeam": "mar", "homeScore": 2, "awayScore": 2, "stage": "group" }
 ]
