@@ -12,7 +12,7 @@ export default ({ slots, bracket, slotResults }) => {
     const right = res.length === 1 && res.includes(team.abbreviation);
     const wrong = !res.includes(team.abbreviation);
     const c = right ? "right" : (wrong ? "wrong" : "");
-    const pointsMarkup = right ? `+${slot.points}` : (wrong ? `✘` : '');
+    const pointsMarkup = right ? `✓ +${slot.points}` : (wrong ? `✘` : '');
 
     return <span className={c}><span className="team-name">{ team.name }</span> <span className="points">{ pointsMarkup }</span></span>
   }
@@ -73,18 +73,18 @@ export default ({ slots, bracket, slotResults }) => {
     </div>
 
     <div className="stage">
-      <h1>Semifinals</h1>
+      <h1>Semifinals (8 pts)</h1>
       { koMatch('Semi 1', 'SF-1') }
       { koMatch('Semi 2', 'SF-2') }
     </div>
 
     <div className="stage">
-      <h1>Third Place</h1>
+      <h1>Third Place (1 pt)</h1>
       { koMatch('Match for Third Place', 'Third') }
     </div>
 
     <div className="stage">
-      <h1>Final</h1>
+      <h1>Final (13 pts)</h1>
       { koMatch('Final', 'Final') }
     </div>
   </div>;

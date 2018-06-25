@@ -153,10 +153,20 @@ ul.pot-list li {
 
 svg.score-range {
   width: 100%;
-  height: 4px;
+  vertical-align: middle;
+  opacity: 0.6;
+  max-height: 1.5em;
+  /* background-color: blue; */
 }
 
-svg rect.track-fill {
-  color: #D30208;
-  width: 100%;
+svg.score-range line {
+  /* stroke: #D30208; */
+  stroke-width: 10;
+}
+
+svg.score-range rect {
+  stroke-width: 3;
+  stroke-dasharray: 10, 2;
+  vector-effect: non-scaling-stroke;
+  fill: none;
 }
