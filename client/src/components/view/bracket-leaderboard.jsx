@@ -40,7 +40,7 @@ export default ({ players }) => {
                 </linearGradient>
               </defs>
               <line x1="0" x2={player.minScore} y1="5" y2="5" stroke="url(#gradient)"></line>
-              <rect x={player.minScore+1} width={player.maxScore - player.minScore} y="0" height="9" stroke="url(#gradient)"></rect>
+              <rect x={player.minScore} width={player.maxScore - player.minScore} y="0" height="9" stroke="url(#gradient)"></rect>
             </svg>
           </td>
           <td className="numeric">{player.maxScore}</td>
