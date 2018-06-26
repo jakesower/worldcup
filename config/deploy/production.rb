@@ -56,6 +56,6 @@ server "jakesower.com",
     user: "deploy", # overrides user setting above
     keys: %w(/home/jake/.ssh/id_rsa),
     forward_agent: true,
-    auth_methods: %w(publickey password)
+    # auth_methods: %w(publickey password)
     # password: "please use keys"
   }
