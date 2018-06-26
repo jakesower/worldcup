@@ -33,7 +33,7 @@ export default class ViewPots extends Component {
     return <div className="app-wrapper">
       <h1>{this.group.replace(/[-_]/, ' ')}</h1>
       <main>
-        <div className="note">Last game uploaded: IRN 1 - 1 POR / ESP 2 - 2 MAR</div>
+        <div className="note">Last game uploaded: DEN 0 - 0 FRA / AUS 0 - 2 PER</div>
         <div className="note">I do my best to keep these scores current, but they may lag. Expect spoilers when checking this page.</div>
         <table>
           <thead>
