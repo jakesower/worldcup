@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react';
 import matches from '../../data/matches';
-import { ascend, descend, prop, sortWith } from 'ramda';
 
 const groups = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
 

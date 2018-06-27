@@ -1,13 +1,11 @@
 import React from 'react';
 import { ascend, descend, max, min, prop, sortWith } from 'ramda';
 
-export default ({ players }) => {
+export default ({ players, slotResults }) => {
   const byPlayer = ascend(prop('player'));
   const byMinScore = descend(prop('minScore'));
-  const byMaxScore = descend(prop('maxScore'));
   const byMidpoint = descend(p => p.minScore + p.maxScore);
 
-  const minScore = players.map(prop('minScore')).reduce(min, Infinity);
   const maxScore = players.map(prop('maxScore')).reduce(max, -Infinity);
 
   return <table className="leaderboard">
@@ -21,10 +19,12 @@ export default ({ players }) => {
       </tr>
     </thead>
     <tbody>
-      {sortWith([byMidpoint, byPlayer], players).map(player =>
-        <tr key={player.player}>
+      {sortWith([byMidpoint, byMinScore, byPlayer], players).map(player => {
+        const loser = !slotResults['Final'].includes(player.bracket['Winner of Final'].abbreviation);
+
+        return <tr key={player.player}>
           <td>{player.player}</td>
-          <td>{player.bracket['Winner of Final'].name}</td>
+          <td className={ loser ? "loser" : "" }>{player.bracket['Winner of Final'].name}</td>
           <td className="numeric">{player.minScore}</td>
           <td width="100%">
             <svg
@@ -45,7 +45,7 @@ export default ({ players }) => {
           </td>
           <td className="numeric">{player.maxScore}</td>
         </tr>
-      )}
+      })}
     </tbody>
   </table>;
 };

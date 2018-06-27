@@ -89,7 +89,7 @@ export default class ViewBrackets extends Component {
 
 
   viewLeaderboard() {
-    return <Leaderboard players={this.players} />
+    return <Leaderboard players={this.players} slotResults={this.slotResults} />
   }
 
 

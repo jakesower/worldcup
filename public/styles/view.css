@@ -138,6 +138,10 @@ table .numeric {
   color: #05B305;
 }
 
+.leaderboard .loser {
+  text-decoration: line-through;
+}
+
 ul.pot-list li {
   text-transform: uppercase;
 }
