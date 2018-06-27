@@ -40,5 +40,7 @@
   { "id": 37, "homeTeam": "nga", "awayTeam": "arg", "homeScore": 1, "awayScore": 2, "stage": "group" },
   { "id": 38, "homeTeam": "isl", "awayTeam": "cro", "homeScore": 1, "awayScore": 2, "stage": "group" },
   { "id": 37, "homeTeam": "kor", "awayTeam": "ger", "homeScore": 2, "awayScore": 0, "stage": "group" },
-  { "id": 38, "homeTeam": "mex", "awayTeam": "swe", "homeScore": 0, "awayScore": 3, "stage": "group" }
+  { "id": 38, "homeTeam": "mex", "awayTeam": "swe", "homeScore": 0, "awayScore": 3, "stage": "group" },
+  { "id": 39, "homeTeam": "srb", "awayTeam": "bra", "homeScore": 0, "awayScore": 2, "stage": "group" },
+  { "id": 40, "homeTeam": "sui", "awayTeam": "crc", "homeScore": 2, "awayScore": 2, "stage": "group" }
 ]
