@@ -33,7 +33,7 @@ export default class ViewPots extends Component {
     return <div className="app-wrapper">
       <h1>{this.group.replace(/[-_]/, ' ')}</h1>
       <main>
-        <div className="note">Last games uploaded: SRB 0 - 2 BRA / SUI 2 - 2 CRC</div>
+        <div className="note">Last games uploaded: JPN 0 - 1 POL / SEN 0 - 1 COL</div>
         <div className="note">I do my best to keep these scores current, but they may lag. Expect spoilers when checking this page.</div>
         <div className="note">Rule Clarification: During knockout round matches, only goals scored during regulation will be counted.</div>
         <table>
