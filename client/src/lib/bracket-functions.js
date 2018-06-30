@@ -30,7 +30,7 @@ export function possibleTeamsForSlot(slots, matches, teamsByGroup, slotId) {
     const result = matches.find(m => m.id === slot.id);
     const lookup = idx => possibleTeamsForSlot(slots, matches, teamsByGroup, slot.sources[idx]);
     return result ?
-      [result] :
+      [result.winner] :
       union(lookup(0), lookup(1));
   }
 

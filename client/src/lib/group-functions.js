@@ -1,5 +1,4 @@
-import { descend, findIndex, flatten, merge, prop, range, sortBy, sortWith, union, xprod } from 'ramda';
-import { countTrue } from './utils';
+import { descend, flatten, merge, prop, range, sortBy, sortWith, union, xprod } from 'ramda';
 
 export function points(matches, team) {
   const win = (t, m) => (t === m.homeTeam && m.homeScore > m.awayScore) || (t === m.awayTeam && m.awayScore > m.homeScore);
@@ -110,13 +109,6 @@ export function possibleTeamPositions(matches, teams) {
     const targetScore = outcome.find(({ team }) => targetTeam === team).score;
     return range(1, 5).filter(i => outcome[i-1].score === targetScore);
   }
-
-  // const placesWithTiebreakers = (outcome, targetTeam) => {
-  //   const cDesc = fn => descend(t => fn(matches, t)); // curry descend with matches
-  //   const results = sortWith([cDesc(points), cDesc(goalDifference), cDesc(goalsFor)])(teams);
-  //   return findIndex()
-  // }
-
 
   return allPotentials.reduce(
     (teamPairs, matchSet) => {

@@ -39,6 +39,7 @@ export default class ViewBrackets extends Component {
 
     const teamsByGroup = map(map(prop('abbreviation')))(props.tournamentGroups);
     this.slotResults = map(s => possibleTeamsForSlot(props.slots, props.matchResults, teamsByGroup, s.id))(props.slots);
+    console.log(this.slotResults);
 
     this.players = props.players.map((p, i) => ({
       id: i,
