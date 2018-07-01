@@ -12,7 +12,6 @@ export default class ViewPots extends Component {
     }));
     this.group = props.group;
     this.matchResults = props.matchResults;
-    console.log(props)
   }
 
 
@@ -33,7 +32,7 @@ export default class ViewPots extends Component {
     return <div className="app-wrapper">
       <h1>{this.group.replace(/[-_]/, ' ')}</h1>
       <main>
-        <div className="note">Last game uploaded: URU 2 - 1 POR</div>
+        <div className="note">Last game uploaded: ESP 1 - 1 RUS (RUS wins on penalties)</div>
         <div className="note">I do my best to keep these scores current, but they may lag. Expect spoilers when checking this page.</div>
         <div className="note">Rule Clarification: During knockout round matches, only goals scored during regulation will be counted.</div>
         <table>
