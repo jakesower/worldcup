@@ -58,5 +58,6 @@
   { "id": "QF-1", "homeTeam": "uru", "awayTeam": "fra", "homeScore": 0, "awayScore": 2, "stage": "knockout", "winner": "fra" },
   { "id": "QF-2", "homeTeam": "bra", "awayTeam": "bel", "homeScore": 1, "awayScore": 2, "stage": "knockout", "winner": "bel" },
   { "id": "QF-3", "homeTeam": "rus", "awayTeam": "cro", "homeScore": 1, "awayScore": 1, "stage": "knockout", "winner": "cro" },
-  { "id": "QF-4", "homeTeam": "swe", "awayTeam": "eng", "homeScore": 0, "awayScore": 2, "stage": "knockout", "winner": "eng" }
+  { "id": "QF-4", "homeTeam": "swe", "awayTeam": "eng", "homeScore": 0, "awayScore": 2, "stage": "knockout", "winner": "eng" },
+  { "id": "SF-1", "homeTeam": "fra", "awayTeam": "bel", "homeScore": 1, "awayScore": 0, "stage": "knockout", "winner": "fra" }
 ]
