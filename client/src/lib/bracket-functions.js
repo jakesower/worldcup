@@ -15,7 +15,7 @@ import { possibleTeamPositions } from './group-functions';
  */
 
 // Given the results of a group, what's the outcome.
-export function possibleTeamsForSlot(slots, matches, teamsByGroup, slotId) {
+export function possibleTeamsForSlot(slots, matches, teamsByGroup, slotId, loser = false) {
   const slot = slots[slotId];
 
   function groupSlot() {
@@ -28,9 +28,9 @@ export function possibleTeamsForSlot(slots, matches, teamsByGroup, slotId) {
 
   function koSlot() {
     const result = matches.find(m => m.id === slot.id);
-    const lookup = idx => possibleTeamsForSlot(slots, matches, teamsByGroup, slot.sources[idx]);
+    const lookup = idx => possibleTeamsForSlot(slots, matches, teamsByGroup, slot.sources[idx], slot.losers);
     return result ?
-      [result.winner] :
+      [(loser ? result.loser : result.winner)] :
       union(lookup(0), lookup(1));
   }
 
