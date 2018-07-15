@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { ascend, descend, flatten, prop, sortBy, sortWith, values } from 'ramda';
+import pots from '../data/2018-pots.json';
 
 export default class ViewPots extends Component {
   constructor(props) {
     super(props);
+    console.log(['A','B','C','D'].map(g => allScores(pots[g], props.matchResults)));
 
     this.players = props.players.map(p => ({
       player: p.player,
@@ -32,7 +34,22 @@ export default class ViewPots extends Component {
     return <div className="app-wrapper">
       <h1>{this.group.replace(/[-_]/, ' ')}</h1>
       <main>
-        <div className="note">All games are in. I'll post optimal picks by the end of today. :)</div>
+        <div className="note">All games are in. Best possible picks:
+         <br/><br/>
+          Pot A: BEL (10), FRA (8)<br/>
+          Pot B: ENG (5), CRO/URU (4)<br/>
+          Pot C: SWE (2), DEN (1)<br/>
+          Pot D: KOR (0), JPN/NGA (-1)<br/><br/>
+          Best Possible Score: 29
+          <br/><br/>
+          Worst Picks. :)
+          <br/><br/>
+          Pot A: ARG (-3), POL (-3)<br/>
+          Pot B: MEX (-3), PER/SUI (0)<br/>
+          Pot C: EGY (-4), CRC/ISL/TUN (-3)<br/>
+          Pot D: PAN (-9), KSA (-5)<br/><br/>
+          Worst Possible Score: -30
+        </div>
         <table>
           <thead>
             <tr>
@@ -60,6 +77,11 @@ export default class ViewPots extends Component {
       </main>
     </div>
   }
+}
+
+
+function allScores(group, matches) {
+  return group.map(c => [c, countryScore(c, matches)]);
 }
 
 
